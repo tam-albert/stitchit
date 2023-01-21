@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import NavBar from "./modules/NavBar";
 import Home from "./pages/Home";
+import LoggedOutHome from "./pages/LoggedOutHome";
 import Journal from "./pages/Journal";
 import MyJournals from "./pages/MyJournals";
 import Feed from "./pages/Feed";
@@ -52,7 +53,16 @@ const App = () => {
       <NavBar />
       <div className="App-container">
         <Router>
-          <Home handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} path="/" />
+          {userId ? (
+            <Home handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} path="/" />
+          ) : (
+            <LoggedOutHome
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              userId={userId}
+              path="/"
+            />
+          )}
           <Profile path="/profile/:userId" />
           <Journal path="/journal/:journalId" />
           <MyJournals path="/myjournals" />

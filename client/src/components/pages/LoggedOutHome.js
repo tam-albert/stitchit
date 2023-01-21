@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
 import "../../utilities.css";
-import "./Home.css";
+import "./LoggedOutHome.css";
 import title from "./stitchit_title.png";
 // This identifies your web application to Google's authentication service
 const GOOGLE_CLIENT_ID = "985251671309-tjcerql1bd9pdco3398e8srppbcvat4t.apps.googleusercontent.com";
 
-const Home = (props) => {
+const LoggedOutHome = (props) => {
   useEffect(() => {
     document.title = "STITCHIT";
   }, []);
@@ -43,9 +43,8 @@ const Home = (props) => {
           )}
         </GoogleOAuthProvider>
       </div>
-      <p>You are signed in!</p>
     </>
   );
 };
 
-export default Home;
+export default LoggedOutHome;
