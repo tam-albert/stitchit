@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 import "./NavBar.css";
+import title from "./stitchit_title.png";
 
 // This identifies your web application to Google's authentication service
 const GOOGLE_CLIENT_ID = "985251671309-tjcerql1bd9pdco3398e8srppbcvat4t.apps.googleusercontent.com";
@@ -28,7 +29,7 @@ const NavBar = (props) => {
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
         <Link to="/" className="NavBar-link">
-          Stitchit
+          <img src={title} alt="Title" className="smallTitle"/>
         </Link>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">

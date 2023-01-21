@@ -1,6 +1,6 @@
 .NavBar-container {
   padding: var(--s) var(--m);
-  background-color: var(--primary);
+  background-color: white;
 }
 
 .NavBar-title {
@@ -14,7 +14,7 @@
 
 .NavBar-link,
 .NavBar-link:visited {
-  color: var(--white);
+  color: black;
   opacity: 0.6;
   text-decoration: none;
 }
@@ -29,4 +29,8 @@
 
 .NavBar-link + .NavBar-link {
   margin-left: var(--m);
+}
+
+.smallTitle {
+  width: 20%;
 }
