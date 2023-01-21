@@ -3,10 +3,10 @@ import { Router } from "@reach/router";
 import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
 import Profile from "./pages/Profile.js";
 import NavBar from "./modules/NavBar.js";
 import Home from "./pages/Home.js";
+import Journal from "./pages/Journal.js";
 
 import "../utilities.css";
 
@@ -51,7 +51,10 @@ const App = () => {
       <div className="App-container">
         <Router>
           <Home path="/" />
-          <Profile path="/profile/" />
+          <Profile path="/profile/:userId" />
+          <Journal path="/journal/:journalId" />
+          <MyJournals path="/myjournals" />
+          <Feed path="/feed" />
           <NotFound default />
         </Router>
       </div>
