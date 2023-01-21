@@ -12,6 +12,7 @@ import MyJournals from "./pages/MyJournals";
 import Feed from "./pages/Feed";
 
 import "../utilities.css";
+import "./App.css";
 
 import { socket } from "../client-socket.js";
 
