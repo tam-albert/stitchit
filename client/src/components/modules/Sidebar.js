@@ -9,7 +9,7 @@ const Sidebar = (props) => {
         <ul className="space-y-2">
           <li>
             <a
-              href="#"
+              href="/"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <svg
@@ -27,7 +27,7 @@ const Sidebar = (props) => {
           </li>
           <li>
             <a
-              href="#"
+              href="/myjournals"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <svg
@@ -44,12 +44,12 @@ const Sidebar = (props) => {
                   d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
                 />
               </svg>
-              <span className="flex-1 ml-3 whitespace-nowrap">Journals</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">My Journals</span>
             </a>
           </li>
           <li>
             <a
-              href="#"
+              href="/prompts"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <svg
@@ -71,7 +71,7 @@ const Sidebar = (props) => {
           </li>
           <li>
             <a
-              href="#"
+              href="/drafts"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <svg
@@ -93,7 +93,7 @@ const Sidebar = (props) => {
           </li>
           <li>
             <a
-              href="#"
+              href="/feed"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
             >
               <svg
@@ -115,23 +115,27 @@ const Sidebar = (props) => {
           </li>
         </ul>
         {props.userId ? (
-          <div className="bottom-0 fixed flex items-center px-2 py-4 text-base font-normal text-gray-900 rounded-lg dark:text-white">
-            <svg
-              aria-hidden="true"
-              className="flex-shrink-0 w-10 h-10"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            <span className="flex-1 ml-3 truncate">
-              <span>{props.userName}</span>
-            </span>
+          <div className="bottom-0 px-2 py-4 absolute text-lg font-normal text-gray-900 rounded-lg">
+            <a className="flex items-center" href={`/profile/${props.userId}`}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-8 h-8"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+
+              <span className="flex-1 ml-3 truncate">
+                <span>{props.userName}</span>
+              </span>
+            </a>
           </div>
         ) : null}
       </div>

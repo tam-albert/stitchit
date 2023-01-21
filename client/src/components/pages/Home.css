@@ -1,36 +1,36 @@
 .Home-name {
-    font-size: 40px;
-    font-weight: 300;
+  font-size: 40px;
+  font-weight: 300;
 }
 
 body {
-    background-color: antiquewhite;
+  background-color: antiquewhite;
 }
 
 .title {
-    width: 70%;
-    margin-left: 20%;
-    margin-top: 10%;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 10%;
 }
 
 .tag {
-    border-radius: 25px;
-    background: #A7D8BC;
-    width: fit-content;
-    height: fit-content;
-    
-    font-style: italic;
-    font-size: 30px;
-    margin-top: 50px;    
-    margin-left: auto;
-    margin-right: auto;
+  border-radius: 25px;
+  background: #a7d8bc;
+  width: fit-content;
+  height: fit-content;
+
+  font-style: italic;
+  font-size: 30px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .highlight {
-    margin: auto;
+  margin: auto;
 }
 
 .join {
-    margin-top: 50px;
-    margin-left: 43%;
+  margin-top: 50px;
+  margin-left: 43%;
 }

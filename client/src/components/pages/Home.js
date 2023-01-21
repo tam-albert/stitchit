@@ -33,7 +33,6 @@ const Home = (props) => {
           )}
         </GoogleOAuthProvider>
       </div>
-      <p>You are signed in!</p>
     </>
   );
 };
