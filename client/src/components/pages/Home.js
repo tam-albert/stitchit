@@ -10,12 +10,11 @@ const Home = () => {
     document.title = "STITCHIT";
   }, []);
 
-
   return (
     <>
-        <img src={title} alt="Title" className="title"/>;
+        <img src={title} alt="Title" className="title"/>
+        <h1 className="tag">a collaborative journal.</h1>
     </>
-
   );
 };
 

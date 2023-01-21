@@ -7,8 +7,25 @@ body {
     background-color: antiquewhite;
 }
 
-.title{
+.title {
     width: 70%;
     margin-left: 20%;
     margin-top: 10%;
+}
+
+.tag {
+    border-radius: 25px;
+    background: #A7D8BC;
+    width: fit-content;
+    height: fit-content;
+    
+    font-style: italic;
+    font-size: 30px;
+    margin-top: 50px;    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.highlight {
+    margin: auto;
 }
