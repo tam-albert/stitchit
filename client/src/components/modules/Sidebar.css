@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@400&display=swap");
+
+.Sidebar-container {
+  font-family: "Unbounded";
+  transition: 1s ease;
+}
+
+.Sidebar-toggle {
+  position: absolute;
+  top: 45%;
+  bottom: 45%;
+  left: 100%;
+  flex-basis: 100%;
+  padding: 1%;
+}
+
+.Sidebar-container[minimized="1"] {
+  width: 0;
+}
