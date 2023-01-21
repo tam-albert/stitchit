@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 
 const Sidebar = (props) => {
-  const [wobble, setWobble] = useState(0);
+  const [minimized, setMinimized] = useState(0);
   return (
-    <aside className="w-64 flex-none Sidebar-container drop-shadow-2xl" aria-label="Sidebar">
+    <aside
+      className="w-64 flex-none Sidebar-container drop-shadow-2xl"
+      minimized={minimized}
+      aria-label="Sidebar"
+    >
       <div className="px-3 py-4 overflow-y-auto flex flex-col rounded bg-gray-100 dark:bg-gray-800 h-full min-h-screen">
-        <ul className="space-y-2">
+        <ul className="space-y-2 flex-grow">
           <li>
             <a
               href="/"
@@ -116,7 +120,7 @@ const Sidebar = (props) => {
           </li>
         </ul>
         {props.userId ? (
-          <div className="bottom-0 px-2 py-4 absolute text-lg font-normal text-gray-900 rounded-lg">
+          <div className="bottom-0 px-2 py-4 text-lg font-normal text-gray-900 rounded-lg">
             <a className="flex items-center" href={`/profile/${props.userId}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -143,13 +147,8 @@ const Sidebar = (props) => {
           className="Sidebar-toggle bg-gray-100"
           onClick={() => {
             console.log("clicked");
-            setWobble(1);
+            setMinimized(1 - minimized);
           }}
-          onAnimationEnd={() => {
-            console.log("and animation ended");
-            setWobble(0);
-          }}
-          wobble={wobble}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
