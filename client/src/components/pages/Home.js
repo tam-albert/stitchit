@@ -13,16 +13,6 @@ const Home = (props) => {
   }, []);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleLogin = (res) => {
-    // 'res' contains the response from Google's authentication servers
-    console.log(res);
-    setLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    console.log("Logged out successfully!");
-    setLoggedIn(false);
-  };
   return (
     <>
       <img src={title} alt="Title" className="title" />

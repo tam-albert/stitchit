@@ -4,12 +4,12 @@ import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import NavBar from "./modules/NavBar";
 import Home from "./pages/Home";
 import LoggedOutHome from "./pages/LoggedOutHome";
 import Journal from "./pages/Journal";
 import MyJournals from "./pages/MyJournals";
 import Feed from "./pages/Feed";
+import Sidebar from "./modules/Sidebar";
 
 import "../utilities.css";
 import "./App.css";
@@ -51,25 +51,32 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="App-container">
-        <Router>
-          {userId ? (
-            <Home handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} path="/" />
-          ) : (
-            <LoggedOutHome
-              handleLogin={handleLogin}
-              handleLogout={handleLogout}
-              userId={userId}
-              path="/"
-            />
-          )}
-          <Profile path="/profile/:userId" />
-          <Journal path="/journal/:journalId" />
-          <MyJournals path="/myjournals" />
-          <Feed path="/feed" />
-          <NotFound default />
-        </Router>
+      <div className="flex">
+        <Sidebar />
+        <div>
+          <Router>
+            {userId ? (
+              <Home
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+                path="/"
+              />
+            ) : (
+              <LoggedOutHome
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                userId={userId}
+                path="/"
+              />
+            )}
+            <Profile path="/profile/:userId" />
+            <Journal path="/journal/:journalId" />
+            <MyJournals path="/myjournals" />
+            <Feed path="/feed" />
+            <NotFound default />
+          </Router>
+        </div>
       </div>
     </>
   );
