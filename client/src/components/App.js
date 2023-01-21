@@ -14,11 +14,13 @@ import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
+import { gapi } from "gapi-script";
+
 /**
  * Define the "App" component
  */
 const App = () => {
-  const [userId, setUserId] = useState(undefined);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -29,27 +31,30 @@ const App = () => {
     });
   }, []);
 
-  const handleLogin = (credentialResponse) => {
-    const userToken = credentialResponse.credential;
-    const decodedCredential = jwt_decode(userToken);
-    console.log(`Logged in as ${decodedCredential.name}`);
+  const handleLogin = (res) => {
+    console.log("handleLogin called");
+    const userToken = res.tokenObj.id_token;
+    console.log(res);
     post("/api/login", { token: userToken }).then((user) => {
+      // the server knows we're logged in now
+      console.log("wtf help");
       setUserId(user._id);
-      post("/api/initsocket", { socketid: socket.id });
+      console.log(user);
     });
   };
 
   const handleLogout = () => {
-    setUserId(undefined);
+    console.log("Logged out successfully!");
+    setUserId(null);
     post("/api/logout");
   };
 
   return (
     <>
-      <NavBar />
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <div className="App-container">
         <Router>
-          <Home path = "/" />
+          <Home path="/" />
           <Profile path="/profile/" />
           <NotFound default />
         </Router>
@@ -57,6 +62,5 @@ const App = () => {
     </>
   );
 };
-
 
 export default App;
