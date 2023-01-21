@@ -16,7 +16,7 @@ const NavBar = (props) => {
         </Link>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        <Link to="/profile/" className="NavBar-link">
+        <Link to="/profile/:userId" className="NavBar-link">
           Profile
         </Link>
       </div>
