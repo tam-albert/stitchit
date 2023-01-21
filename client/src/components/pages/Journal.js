@@ -1,7 +1,7 @@
 import React from "react";
 
-const Feed = () => {
+const Journal = () => {
   return <></>;
 };
 
-export default Feed;
+export default Journal;
