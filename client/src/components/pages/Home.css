@@ -2,3 +2,13 @@
     font-size: 40px;
     font-weight: 300;
 }
+
+body {
+    background-color: antiquewhite;
+}
+
+.title{
+    width: 70%;
+    margin-left: 20%;
+    margin-top: 10%;
+}

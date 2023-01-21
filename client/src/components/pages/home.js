@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 
 import "../../utilities.css";
 import "./Home.css";
+import title from "./stitchit_title.png";
 
 const Home = () => {
 
   useEffect(() => {
-    document.title = "Home Page";
+    document.title = "STITCHIT";
   }, []);
 
 
   return (
     <>
-        <h1 className="Home-name u-textCenter">STITCHIT: this be our seggsy home page</h1>
+        <img src={title} alt="Title" className="title"/>;
     </>
 
   );
