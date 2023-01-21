@@ -1,6 +1,9 @@
 .NavBar-container {
   padding: var(--s) var(--m);
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .NavBar-title {
@@ -17,7 +20,6 @@
   color: black;
   opacity: 0.6;
   text-decoration: none;
-  text-align: right;
 }
 
 .NavBar-link:hover {
