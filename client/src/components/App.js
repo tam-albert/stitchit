@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import jwt_decode from "jwt-decode";
 
-import NotFound from "./pages/NotFound.js";
-import Profile from "./pages/Profile.js";
-import NavBar from "./modules/NavBar.js";
-import Home from "./pages/Home.js";
-import Journal from "./pages/Journal.js";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import NavBar from "./modules/NavBar";
+import Home from "./pages/Home";
+import Journal from "./pages/Journal";
+import MyJournals from "./pages/MyJournals";
+import Feed from "./pages/Feed";
 
 import "../utilities.css";
 
