@@ -6,7 +6,7 @@ import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Profile from "./pages/Profile.js";
 import NavBar from "./modules/NavBar.js";
-import Home from "./pages/home.js";
+import Home from "./pages/Home.js";
 
 import "../utilities.css";
 
