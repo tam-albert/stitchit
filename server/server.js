@@ -31,10 +31,11 @@ const auth = require("./auth");
 // socket stuff
 const socketManager = require("./server-socket");
 
+// Include .env
+require("dotenv").config();
+
 // Server configuration below
-// TODO change connection URL after setting up your team database
-const mongoConnectionURL = "mongodb+srv://connieej:iA73ZyZlFbGj6Q3u@bukabukabukabuka.ubezjk8.mongodb.net/?retryWrites=true&w=majority"
-// TODO change database name to the name you chose
+const mongoConnectionURL = process.env.ATLAS_SRV;
 const databaseName = "bukabukabukabuka";
 
 // connect to mongodb
@@ -58,7 +59,7 @@ app.use(express.json());
 app.use(
   session({
     // TODO: add a SESSION_SECRET string in your .env file, and replace the secret with process.env.SESSION_SECRET
-    secret: "session-secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
@@ -95,8 +96,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// hardcode port to 3000 for now
-const port = 3000;
+const port = process.env.PORT || 3000;
 const server = http.Server(app);
 socketManager.init(server);
 
