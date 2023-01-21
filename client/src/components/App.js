@@ -49,10 +49,10 @@ const App = () => {
 
   return (
     <>
-      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <NavBar />
       <div className="App-container">
         <Router>
-          <Home path="/" />
+          <Home handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} path="/" />
           <Profile path="/profile/:userId" />
           <Journal path="/journal/:journalId" />
           <MyJournals path="/myjournals" />
