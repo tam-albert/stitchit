@@ -23,12 +23,14 @@ import { get, post } from "../utilities";
  */
 const App = () => {
   const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
+        setUserName(user.name.split(" ")[0]);
       }
     });
   }, []);
@@ -40,19 +42,21 @@ const App = () => {
     post("/api/login", { token: userToken }).then((user) => {
       // the server knows we're logged in now
       setUserId(user._id);
+      setUserName(decodedCredential.name.split(" ")[0]);
     });
   };
 
   const handleLogout = () => {
     console.log("Logged out successfully!");
     setUserId(null);
+    setUserName(null);
     post("/api/logout");
   };
 
   return (
     <>
       <div className="flex">
-        <Sidebar />
+        <Sidebar userId={userId} userName={userName} />
         <div>
           <Router>
             {userId ? (
