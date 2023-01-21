@@ -33,7 +33,7 @@ router.post("/journal", auth.ensureLoggedIn, (req, res) => {
   const newJournal = new Journal({
     collaborator_ids: [req.user._id],
     collaborator_names: [req.user.name],
-    entries_list: []
+    entries_list: [],
   });
 
   newJournal.save().then((journal) => res.send(journal));
@@ -47,12 +47,11 @@ router.get("/comment", (req, res) => {
 
 router.post("/comment", auth.ensureLoggedIn, (req, res) => {
   const newComment = new Comment({
-    
     creator_id: req.user._id,
     creator_name: req.user.name,
     parent: req.body.parent,
     content: req.body.content,
-    timestamp: req.body.timestamp
+    timestamp: req.body.timestamp,
   });
 
   newComment.save().then((comment) => res.send(comment));
@@ -70,18 +69,18 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
     creator_name: req.user.name,
     parent: req.body.parent,
     prompt: req.body.prompt,
-    content: req.body.content
+    content: req.body.content,
   });
 
   newEntry.save().then((entry) => res.send(entry));
 });
 
-router.post("/login", auth.login);
+router.post("/login", auth.login, (req, res) => {});
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
   if (!req.user) {
     // not logged in
-    return res.send({ur not logged in});
+    return res.send({});
   }
 
   res.send(req.user);
@@ -99,7 +98,6 @@ router.post("/initsocket", (req, res) => {
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
   res.send({});
 });
-
 
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
