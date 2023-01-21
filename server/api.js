@@ -75,9 +75,7 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
   newEntry.save().then((entry) => res.send(entry));
 });
 
-router.post("/login", auth.login, (req, res) => {
-  console.log("called login API");
-});
+router.post("/login", auth.login, (req, res) => {});
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
   if (!req.user) {
