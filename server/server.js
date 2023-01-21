@@ -36,7 +36,7 @@ require("dotenv").config();
 
 // Server configuration below
 const mongoConnectionURL = process.env.ATLAS_SRV;
-const databaseName = "bukabukabukabuka";
+const databaseName = "stitchit";
 
 // connect to mongodb
 mongoose

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "@reach/router";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
 import "./NavBar.css";
 
@@ -11,19 +11,6 @@ const GOOGLE_CLIENT_ID = "985251671309-tjcerql1bd9pdco3398e8srppbcvat4t.apps.goo
  * The navigation bar at the top of all pages. Takes no props.
  */
 const NavBar = (props) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const handleLogin = (res) => {
-    // 'res' contains the response from Google's authentication servers
-    console.log(res);
-    setLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    console.log("Logged out successfully!");
-    setLoggedIn(false);
-  };
-
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title u-inlineBlock">
@@ -35,23 +22,20 @@ const NavBar = (props) => {
         <Link to="/profile/" className="NavBar-link">
           Profile
         </Link>
-        {loggedIn ? (
-          <GoogleLogout
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Logout"
-            onLogoutSuccess={handleLogout}
-            onFailure={(err) => console.log(err)}
-            className="NavBar-link NavBar-login"
-          />
-        ) : (
-          <GoogleLogin
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={handleLogin}
-            onFailure={(err) => console.log(err)}
-            className="NavBar-link NavBar-login"
-          />
-        )}
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          {props.userId ? (
+            <button
+              onClick={() => {
+                googleLogout();
+                props.handleLogout();
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <GoogleLogin onSuccess={props.handleLogin} onError={(err) => console.log(err)} />
+          )}
+        </GoogleOAuthProvider>
       </div>
     </nav>
   );

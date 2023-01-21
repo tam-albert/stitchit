@@ -18,7 +18,7 @@ import { get, post } from "../utilities";
  * Define the "App" component
  */
 const App = () => {
-  const [userId, setUserId] = useState(undefined);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -34,22 +34,23 @@ const App = () => {
     const decodedCredential = jwt_decode(userToken);
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
+      // the server knows we're logged in now
       setUserId(user._id);
-      post("/api/initsocket", { socketid: socket.id });
     });
   };
 
   const handleLogout = () => {
-    setUserId(undefined);
+    console.log("Logged out successfully!");
+    setUserId(null);
     post("/api/logout");
   };
 
   return (
     <>
-      <NavBar />
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <div className="App-container">
         <Router>
-          <Home path = "/" />
+          <Home path="/" />
           <Profile path="/profile/" />
           <NotFound default />
         </Router>
@@ -57,6 +58,5 @@ const App = () => {
     </>
   );
 };
-
 
 export default App;
