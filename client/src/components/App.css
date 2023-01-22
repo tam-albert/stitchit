@@ -596,6 +596,14 @@ video {
   z-index: 10;
 }
 
+.m-4{
+  margin: 1rem;
+}
+
+.m-2{
+  margin: 0.5rem;
+}
+
 .-ml-8{
   margin-left: -2rem;
 }
