@@ -17,3 +17,7 @@
 .Sidebar-container[minimized="1"] {
   width: 0;
 }
+
+.Sidebar-container[minimized="1"] > div {
+  padding: 0;
+}
