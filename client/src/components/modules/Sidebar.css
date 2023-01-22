@@ -19,5 +19,7 @@
 }
 
 .Sidebar-container[minimized="1"] > div {
-  padding: 0;
+  transition: 1s ease;
+  padding-left: 0;
+  padding-right: 0;
 }
