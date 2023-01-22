@@ -29,11 +29,13 @@ router.get("/journals", (req, res) => {
   Journal.find({}).then((journals) => res.send(journals));
 });
 
-router.post("/journal", auth.ensureLoggedIn, (req, res) => {
+router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
+  console.log("damn...");
   const newJournal = new Journal({
     collaborator_ids: [req.user._id],
     collaborator_names: [req.user.name],
     entries_list: [],
+    name: req.body.name,
   });
 
   newJournal.save().then((journal) => res.send(journal));

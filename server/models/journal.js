@@ -5,6 +5,7 @@ const JournalSchema = new mongoose.Schema({
   collaborator_ids: [String],
   collaborator_names: [String],
   entries_list: [String],
+  name: String,
 });
 
 // compile model from schema
