@@ -77,7 +77,7 @@ const Sidebar = (props) => {
                 <span>{props.userName}</span>
               </span>
             </a>
-            <LogoutMenu />
+            <LogoutMenu handleLogout={props.handleLogout} />
           </div>
         ) : null}
         <button

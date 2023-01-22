@@ -56,7 +56,7 @@ const App = () => {
   return (
     <>
       <div className="flex">
-        <Sidebar userId={userId} userName={userName} />
+        <Sidebar userId={userId} userName={userName} handleLogout={handleLogout} />
         <div className="p-12 w-full">
           <Router>
             {userId ? (
