@@ -10,6 +10,7 @@ import Journal from "./pages/Journal";
 import MyJournals from "./pages/MyJournals";
 import Feed from "./pages/Feed";
 import Sidebar from "./modules/Sidebar";
+import LoggedOutNotFound from "./pages/LoggedOutNotFound";
 
 import "../utilities.css";
 import "./App.css";
@@ -75,21 +76,15 @@ const App = () => {
           </div>
         </div>
       ) : (
-        <div className="p-12 w-full">
-          <Router>
-            <LoggedOutHome
-              handleLogin={handleLogin}
-              handleLogout={handleLogout}
-              userId={userId}
-              path="/"
-            />
-            <Profile path="/profile/:userId" />
-            <Journal path="/journal/:journalId" userId={userId} />
-            <MyJournals path="/myjournals" />
-            <Feed path="/feed" />
-            <NotFound default />
-          </Router>
-        </div>
+        <Router>
+          <LoggedOutHome
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+            path="/"
+          />
+          <LoggedOutNotFound default />
+        </Router>
       )}
     </>
   );
