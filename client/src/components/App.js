@@ -55,25 +55,34 @@ const App = () => {
 
   return (
     <>
-      <div className="flex">
-        <Sidebar userId={userId} userName={userName} handleLogout={handleLogout} />
-        <div className="p-12 w-full">
-          <Router>
-            {userId ? (
+      {userId ? (
+        <div className="flex">
+          <Sidebar userId={userId} userName={userName} handleLogout={handleLogout} />
+          <div className="p-12 w-full">
+            <Router>
               <Home
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
                 userId={userId}
                 path="/"
               />
-            ) : (
-              <LoggedOutHome
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-                userId={userId}
-                path="/"
-              />
-            )}
+              <Profile path="/profile/:userId" />
+              <Journal path="/journal/:journalId" userId={userId} />
+              <MyJournals path="/myjournals" />
+              <Feed path="/feed" />
+              <NotFound default />
+            </Router>
+          </div>
+        </div>
+      ) : (
+        <div className="p-12 w-full">
+          <Router>
+            <LoggedOutHome
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+              userId={userId}
+              path="/"
+            />
             <Profile path="/profile/:userId" />
             <Journal path="/journal/:journalId" userId={userId} />
             <MyJournals path="/myjournals" />
@@ -81,7 +90,7 @@ const App = () => {
             <NotFound default />
           </Router>
         </div>
-      </div>
+      )}
     </>
   );
 };
