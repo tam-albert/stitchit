@@ -40,10 +40,10 @@ const Journal = (props) => {
     entriesList = <div>Create a new entry to start journaling!</div>;
   }
   return (
-    <>
+    <div className="flex flex-col items-center">
       {props.userId && <NewEntry addNewEntry={addNewEntry} />}
       {entriesList}
-    </>
+    </div>
   );
 };
 
