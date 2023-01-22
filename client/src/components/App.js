@@ -36,6 +36,10 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    document.title = "StitchIt";
+  }, []);
+
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
