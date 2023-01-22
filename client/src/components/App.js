@@ -75,7 +75,7 @@ const App = () => {
               />
             )}
             <Profile path="/profile/:userId" />
-            <Journal path="/journal/:journalId" />
+            <Journal path="/journal/:journalId" userId={userId} />
             <MyJournals path="/myjournals" />
             <Feed path="/feed" />
             <NotFound default />
