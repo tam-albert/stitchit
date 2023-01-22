@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 
 const LoggedOutNotFound = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <div className="p-8">
         <img src={logo} alt="Logo" className="h-16 mx-auto" />
       </div>
