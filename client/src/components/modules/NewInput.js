@@ -74,7 +74,7 @@ const NewComment = (props) => {
  */
 const NewEntry = (props) => {
   const addEntry = (value) => {
-    const body = { content: value };
+    const body = { content: value, journal_id: props.journalId };
     post("/api/entry", body).then((entry) => {
       // display this story on the screen
       props.addNewEntry(entry);
@@ -84,4 +84,4 @@ const NewEntry = (props) => {
   return <NewInput defaultText="New Entry" onSubmit={addEntry} />;
 };
 
-export { NewComment, NewEntry, NewInput};
+export { NewComment, NewEntry, NewInput };

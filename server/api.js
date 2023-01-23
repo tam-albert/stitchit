@@ -60,7 +60,7 @@ router.post("/comment", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.get("/entry", (req, res) => {
-  Entry.find({ parent: req.query.parent }).then((entries) => {
+  Entry.find({ journal_id: req.query.journalId }).then((entries) => {
     res.send(entries);
   });
 });
@@ -69,9 +69,9 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
   const newEntry = new Entry({
     creator_id: req.user._id,
     creator_name: req.user.name,
-    parent: req.body.parent,
     prompt: req.body.prompt,
     content: req.body.content,
+    journal_id: req.body.journal_id,
   });
 
   newEntry.save().then((entry) => res.send(entry));

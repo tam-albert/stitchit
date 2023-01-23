@@ -11,7 +11,7 @@ const Journal = (props) => {
   // when it shows up on screen
   useEffect(() => {
     document.title = "My Journal!";
-    get("/api/entry").then((entryObjs) => {
+    get("/api/entry", { journalId: props.journalId }).then((entryObjs) => {
       let reversedEntryObjs = entryObjs.reverse();
       setEntries(reversedEntryObjs);
     });
@@ -41,7 +41,7 @@ const Journal = (props) => {
   }
   return (
     <div className="flex flex-col items-center">
-      {props.userId && <NewEntry addNewEntry={addNewEntry} />}
+      {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}
       {entriesList}
     </div>
   );
