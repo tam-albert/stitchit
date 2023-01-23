@@ -79,8 +79,8 @@ router.get("/entry", (req, res) => {
 router.post("/entry", auth.ensureLoggedIn, (req, res) => {
   // Check if requested journal exists at all
   try {
-    const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
-    Journal.findById(objectId).then(() => {
+    const objectId = new mongoose.mongo.ObjectID(req.body.journal_id);
+    Journal.findById(objectId).then((journal) => {
       const newEntry = new Entry({
         creator_id: req.user._id,
         creator_name: req.user.name,
@@ -89,7 +89,12 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
         journal_id: req.body.journal_id,
       });
 
-      newEntry.save().then((entry) => res.send(entry));
+      newEntry.save().then((entry) => {
+        // Update entries_list in the journal we found
+        journal.entries_list.push(entry._id);
+        journal.save();
+        res.send(entry);
+      });
     });
   } catch (e) {
     // Malformed journal ID
