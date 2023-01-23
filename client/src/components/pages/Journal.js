@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 import JournalPost from "../modules/JournalPost.js";
 import { NewEntry } from "../modules/NewInput.js";
+import NotFound from "./NotFound";
 
 import { get } from "../../utilities";
 
 const Journal = (props) => {
+  const [journalExists, setJournalExists] = useState(true);
   const [entries, setEntries] = useState([]);
+
+  // Check if the journal actually exists
+  useEffect(() => {
+    get("/api/journals", { journalId: props.journalId }).catch(() => {
+      setJournalExists(false);
+    });
+  });
 
   // called when the "Journal" component "mounts", i.e.
   // when it shows up on screen
@@ -39,11 +48,13 @@ const Journal = (props) => {
   } else {
     entriesList = <div>Create a new entry to start journaling!</div>;
   }
-  return (
+  return journalExists ? (
     <div className="flex flex-col items-center">
       {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}
       {entriesList}
     </div>
+  ) : (
+    <NotFound />
   );
 };
 

@@ -15,6 +15,8 @@ const Entry = require("./models/entry");
 const Journal = require("./models/journal");
 const User = require("./models/user");
 
+const mongoose = require("mongoose");
+
 // import authentication library
 const auth = require("./auth");
 
@@ -25,8 +27,17 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 
 router.get("/journals", (req, res) => {
-  // gets all journals
-  Journal.find({}).then((journals) => res.send(journals));
+  // gets all journals with given ID (or all of them if none provided)
+  if (req.query.journalId) {
+    try {
+      const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
+      Journal.findById(objectId).then((journals) => res.send(journals));
+    } catch (e) {
+      res.status(404).send();
+    }
+  } else {
+    Journal.find().then((journals) => res.send(journals));
+  }
 });
 
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
