@@ -21,12 +21,12 @@ const Sidebar = (props) => {
       minimized={minimized}
       aria-label="Sidebar"
     >
-      <div className="px-3 py-4 overflow-y-auto flex flex-col rounded bg-gray-100 dark:bg-gray-800 h-full min-h-screen">
+      <div className="px-3 py-4 overflow-y-auto flex flex-col rounded bg-gray-100 h-full min-h-screen">
         <ul className="space-y-2 flex-grow">
           <li>
             <Link
               to="/"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <PlusIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">New Stitch</span>
@@ -35,7 +35,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/myjournals"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <BookOpenIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">My Journals</span>
@@ -44,7 +44,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/prompts"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <ChatBubbleBottomCenterIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">Prompts</span>
@@ -53,7 +53,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/drafts"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <DocumentIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">Drafts</span>
@@ -62,7 +62,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/feed"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <QueueListIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">Feed</span>
