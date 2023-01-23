@@ -20,7 +20,8 @@ const Journal = (props) => {
   // when it shows up on screen
   useEffect(() => {
     document.title = "My Journal!";
-    get("/api/entry", { journalId: props.journalId }).then((entryObjs) => {
+    get("/api/journalEntries", { journalId: props.journalId }).then((entryObjs) => {
+      console.log(entryObjs);
       let reversedEntryObjs = entryObjs.reverse();
       setEntries(reversedEntryObjs);
     });

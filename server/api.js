@@ -40,6 +40,19 @@ router.get("/journals", (req, res) => {
   }
 });
 
+router.get("/journalEntries", (req, res) => {
+  try {
+    const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findById(objectId).then((journal) => {
+      Entry.find({
+        _id: { $in: journal.entries_list },
+      }).then((entries) => res.send(entries));
+    });
+  } catch (e) {
+    res.status(404).send();
+  }
+});
+
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
   console.log("damn...");
   const newJournal = new Journal({
