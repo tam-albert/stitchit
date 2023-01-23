@@ -77,15 +77,24 @@ router.get("/entry", (req, res) => {
 });
 
 router.post("/entry", auth.ensureLoggedIn, (req, res) => {
-  const newEntry = new Entry({
-    creator_id: req.user._id,
-    creator_name: req.user.name,
-    prompt: req.body.prompt,
-    content: req.body.content,
-    journal_id: req.body.journal_id,
-  });
+  // Check if requested journal exists at all
+  try {
+    const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findById(objectId).then(() => {
+      const newEntry = new Entry({
+        creator_id: req.user._id,
+        creator_name: req.user.name,
+        prompt: req.body.prompt,
+        content: req.body.content,
+        journal_id: req.body.journal_id,
+      });
 
-  newEntry.save().then((entry) => res.send(entry));
+      newEntry.save().then((entry) => res.send(entry));
+    });
+  } catch (e) {
+    // Malformed journal ID
+    res.status(400).send();
+  }
 });
 
 router.post("/login", auth.login, (req, res) => {});
