@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { post } from "../../utilities";
+import { useNavigate } from "@reach/router";
 
 const NewJournal = () => {
   const [journalName, setJournalName] = useState("");
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setJournalName(event.target.value);
@@ -10,8 +13,8 @@ const NewJournal = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    post("/api/newjournal", { name: journalName }).then(() => {
-      console.log("hi");
+    post("/api/newjournal", { name: journalName }).then((journal) => {
+      navigate(`/journal/${journal._id}`);
     });
     setJournalName("");
   };

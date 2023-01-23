@@ -84,7 +84,6 @@ const Sidebar = (props) => {
         <button
           className="Sidebar-toggle bg-gray-100"
           onClick={() => {
-            console.log("clicked");
             setMinimized(1 - minimized);
           }}
         >

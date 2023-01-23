@@ -15,6 +15,8 @@ const Entry = require("./models/entry");
 const Journal = require("./models/journal");
 const User = require("./models/user");
 
+const mongoose = require("mongoose");
+
 // import authentication library
 const auth = require("./auth");
 
@@ -25,8 +27,30 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 
 router.get("/journals", (req, res) => {
-  // gets all journals
-  Journal.find({}).then((journals) => res.send(journals));
+  // gets all journals with given ID (or all of them if none provided)
+  if (req.query.journalId) {
+    try {
+      const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
+      Journal.findById(objectId).then((journals) => res.send(journals));
+    } catch (e) {
+      res.status(404).send();
+    }
+  } else {
+    Journal.find().then((journals) => res.send(journals));
+  }
+});
+
+router.get("/journalEntries", (req, res) => {
+  try {
+    const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findById(objectId).then((journal) => {
+      Entry.find({
+        _id: { $in: journal.entries_list },
+      }).then((entries) => res.send(entries));
+    });
+  } catch (e) {
+    res.status(404).send();
+  }
 });
 
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
@@ -60,21 +84,35 @@ router.post("/comment", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.get("/entry", (req, res) => {
-  Entry.find({ parent: req.query.parent }).then((entries) => {
+  Entry.find({ journal_id: req.query.journalId }).then((entries) => {
     res.send(entries);
   });
 });
 
 router.post("/entry", auth.ensureLoggedIn, (req, res) => {
-  const newEntry = new Entry({
-    creator_id: req.user._id,
-    creator_name: req.user.name,
-    parent: req.body.parent,
-    prompt: req.body.prompt,
-    content: req.body.content,
-  });
+  // Check if requested journal exists at all
+  try {
+    const objectId = new mongoose.mongo.ObjectID(req.body.journal_id);
+    Journal.findById(objectId).then((journal) => {
+      const newEntry = new Entry({
+        creator_id: req.user._id,
+        creator_name: req.user.name,
+        prompt: req.body.prompt,
+        content: req.body.content,
+        journal_id: req.body.journal_id,
+      });
 
-  newEntry.save().then((entry) => res.send(entry));
+      newEntry.save().then((entry) => {
+        // Update entries_list in the journal we found
+        journal.entries_list.push(entry._id);
+        journal.save();
+        res.send(entry);
+      });
+    });
+  } catch (e) {
+    // Malformed journal ID
+    res.status(400).send();
+  }
 });
 
 router.post("/login", auth.login, (req, res) => {});
