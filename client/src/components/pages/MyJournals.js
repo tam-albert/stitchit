@@ -9,7 +9,7 @@ const MyJournals = (props) => {
   const [journals, setJournals] = useState([]);
 
   useEffect(() => {
-    get("/api/journals", {userId: props.userId}).then((journalObjs) => {
+    get("/api/journals").then((journalObjs) => {
       console.log(journalObjs);
       setJournals(journalObjs);
     });
@@ -30,7 +30,7 @@ const MyJournals = (props) => {
 
   return (
     <>
-      <NewJournal/>
+      <NewJournal />
       <div className="inline-flex flex-wrap">{journalsList}</div>
     </>
   );

@@ -29,7 +29,7 @@ const socketManager = require("./server-socket");
 
 router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
-  const query = {collaborator_ids: req.query.userId}
+  const query = { collaborator_ids: req.user._id };
   if (req.query.journalId) {
     try {
       const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
@@ -40,7 +40,10 @@ router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   } else {
     console.log(req);
     console.log(query);
-    Journal.find(query).then((journals) => {console.log(journals); res.send(journals)});
+    Journal.find(query).then((journals) => {
+      console.log(journals);
+      res.send(journals);
+    });
   }
 });
 
@@ -129,7 +132,7 @@ router.post("/prompt", auth.ensureLoggedIn, (req, res) => {
   const newPrompt = new Prompt({
     content: req.body.content,
     likes: req.body.likes,
-    date: req.body.date
+    date: req.body.date,
   });
 
   newPrompt.save().then((prompt) => res.send(prompt));
