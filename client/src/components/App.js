@@ -10,6 +10,7 @@ import Journal from "./pages/Journal";
 import MyJournals from "./pages/MyJournals";
 import Feed from "./pages/Feed";
 import Sidebar from "./modules/Sidebar";
+import Prompts from "./pages/Prompts";
 import LoggedOutNotFound from "./pages/LoggedOutNotFound";
 
 import "../utilities.css";
@@ -71,6 +72,7 @@ const App = () => {
                 userId={userId}
                 path="/"
               />
+              <Prompts path="/prompts" />
               <Profile path="/profile/:userId" />
               <Journal path="/journal/:journalId" userId={userId} />
               <MyJournals path="/myjournals" />
