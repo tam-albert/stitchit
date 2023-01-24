@@ -14,6 +14,7 @@ const Comment = require("./models/comment");
 const Entry = require("./models/entry");
 const Journal = require("./models/journal");
 const User = require("./models/user");
+const Prompt = require("./models/prompt");
 
 const mongoose = require("mongoose");
 
@@ -99,7 +100,7 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
         creator_name: req.user.name,
         prompt: req.body.prompt,
         content: req.body.content,
-        journal_id: req.body.journal_id,
+        journal_id: req.body.journal,
       });
 
       newEntry.save().then((entry) => {
@@ -113,6 +114,22 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
     // Malformed journal ID
     res.status(400).send();
   }
+});
+
+router.get("/prompt", (req, res) => {
+  Prompt.find({ date: req.query.date }).then((prompts) => {
+    res.send(prompts);
+  });
+});
+
+router.post("/prompt", auth.ensureLoggedIn, (req, res) => {
+  const newPrompt = new Prompt({
+    content: req.body.content,
+    likes: req.body.likes,
+    date: req.body.date
+  });
+
+  newPrompt.save().then((prompt) => res.send(prompt));
 });
 
 router.post("/login", auth.login, (req, res) => {});
