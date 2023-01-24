@@ -708,6 +708,10 @@ video {
   height: 4rem;
 }
 
+.h-48{
+  height: 12rem;
+}
+
 .min-h-screen{
   min-height: 100vh;
 }
@@ -788,6 +792,10 @@ video {
   flex-direction: column;
 }
 
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
 .items-center{
   align-items: center;
 }
@@ -862,6 +870,11 @@ video {
 .bg-orange-200{
   --tw-bg-opacity: 1;
   background-color: rgb(254 215 170 / var(--tw-bg-opacity));
+}
+
+.bg-gray-800{
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .p-12{

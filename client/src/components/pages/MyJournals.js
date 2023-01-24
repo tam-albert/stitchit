@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NewJournal from "../modules/NewJournal";
 import { Link } from "@reach/router";
 
-import "./MyJournals.css"
+import "./MyJournals.css";
 import { get } from "../../utilities";
 
 const MyJournals = () => {
@@ -16,10 +16,13 @@ const MyJournals = () => {
   }, []);
 
   const journalsList = journals.map((journal) => (
-    <div className="inline-flex border-2 border-gray-400 rounded-md p-4 my-4">
-        <Link to={`/journal/${journal._id}`} key={journal._id}>
+    <div className="test flex flex-col border-2 border-gray-400 rounded-md my-4">
+      <Link to={`/journal/${journal._id}`} key={journal._id}>
+        <div className="bg-gray-800 w-full h-48"></div>
+        <div className="m-4">
           {journal.name} <span className="text-gray-500">by {journal.collaborator_names[0]}</span>
-        </Link>
+        </div>
+      </Link>
     </div>
   ));
 
@@ -28,7 +31,7 @@ const MyJournals = () => {
   return (
     <>
       <NewJournal />
-      {journalsList}
+      <div className="inline-flex flex-wrap">{journalsList}</div>
     </>
   );
 };
