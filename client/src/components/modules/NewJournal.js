@@ -20,7 +20,7 @@ const NewJournal = () => {
   };
 
   return (
-    <div>
+    <div className="u-flex">
       <input type="text" placeholder="Journal name" value={journalName} onChange={handleChange} />
       <button type="submit" className="NewInput-button" value="Submit" onClick={handleSubmit}>
         Create New Journal

@@ -16,7 +16,7 @@ const MyJournals = (props) => {
   }, []);
 
   const journalsList = journals.map((journal) => (
-    <div className="test flex-col">
+    <div className="grid flex-col">
       <Link to={`/journal/${journal._id}`} key={journal._id}>
         <div className="w-full box"></div>
         <div className="m-4">
@@ -30,7 +30,7 @@ const MyJournals = (props) => {
 
   return (
     <>
-      <NewJournal />
+      <NewJournal/>
       <div className="inline-flex flex-wrap">{journalsList}</div>
     </>
   );

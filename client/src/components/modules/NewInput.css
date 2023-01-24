@@ -12,7 +12,7 @@
 }
 
 .NewInput-entry {
-  height: 800px;
+  height: 400px;
   width: 1000px;
   font-size: 20px;
   padding: var(--s) var(--m);
