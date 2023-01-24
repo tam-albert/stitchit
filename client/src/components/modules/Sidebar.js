@@ -21,12 +21,12 @@ const Sidebar = (props) => {
       minimized={minimized}
       aria-label="Sidebar"
     >
-      <div className="px-3 py-4 overflow-y-auto flex flex-col rounded bg-gray-100 h-full min-h-screen">
-        <ul className="space-y-2 flex-grow">
+      <div className="px-3 py-4 flex flex-col rounded bg-gray-100 min-h-screen sticky top-0">
+        <ul className="space-y-2 flex-grow overflow-x-hidden">
           <li className="Sidebar-container">
             <Link
               to="/"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
+              className="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <PlusIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">New Stitch</span>
@@ -35,7 +35,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/myjournals"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
+              className="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <BookOpenIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">My Journals</span>
@@ -44,7 +44,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/prompts"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
+              className="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <ChatBubbleBottomCenterIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">Prompts</span>
@@ -53,7 +53,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/drafts"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
+              className="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <DocumentIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">Drafts</span>
@@ -62,7 +62,7 @@ const Sidebar = (props) => {
           <li>
             <Link
               to="/feed"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
+              className="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg hover:bg-gray-200"
             >
               <QueueListIcon className="w-6 h-6" />
               <span className="flex-1 ml-3 whitespace-nowrap">Feed</span>
@@ -70,8 +70,8 @@ const Sidebar = (props) => {
           </li>
         </ul>
         {props.userId ? (
-          <div className="bottom-0 px-2 py-4 text-lg font-normal text-gray-900 rounded-lg flex">
-            <Link className="flex grow items-center" to={`/profile/${props.userId}`}>
+          <div className="bottom-0 px-2 py-4 text-lg overflow-x-hidden font-normal text-gray-900 rounded-lg flex">
+            <Link className="flex w-full items-center" to={`/profile/${props.userId}`}>
               <UserCircleIcon className="w-6 h-6" />
 
               <span className="flex-1 ml-3 truncate">
