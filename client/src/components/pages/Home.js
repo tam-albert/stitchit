@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PostDialog from "../modules/PostDialog";
 
 import "../../utilities.css";
 import "./Home.css";
@@ -14,9 +15,8 @@ const Home = (props) => {
           placeholder="Speak your mind, add an image, or answer our daily prompt."
           maxlength="20000"
         ></textarea>
-        <div className="bg-tertiary my-1 p-4 rounded-md flex">
-          <div className="grow">HIIII</div>
-          <div>I LOVE EVERYBODY UNTIL I LOVE YOU</div>
+        <div className="bg-light-pink my-1 p-4 rounded-md flex flex-row-reverse items-center">
+          <PostDialog />
         </div>
       </div>
     </>
