@@ -31,7 +31,7 @@ const Home = (props) => {
           maxLength="20000"
           onChange={handleChange}
         ></textarea>
-        <div className="bg-light-pink my-1 p-4 rounded-md flex flex-row-reverse items-center">
+        <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
           <PostDialog publish={publish} />
         </div>
       </div>
