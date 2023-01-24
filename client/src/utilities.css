@@ -22,8 +22,8 @@
 @tailwind utilities;
 
 :root {
-  --primary: #396dff;
-  --primary--dim: #6987db;
+  --primary: #41927D;
+  --primary--dim: #226C58;
   --darkgrey: #d4d4d4;
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;

@@ -21,7 +21,7 @@
 
 .NewInput-input:focus-within {
   border-color: var(--primary--dim);
-  box-shadow: 0 0 0 var(--xs) rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 var(--xs) rgba(115, 144, 175, 0.25);
 }
 
 .NewInput-button {

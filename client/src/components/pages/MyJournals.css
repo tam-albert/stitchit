@@ -5,6 +5,8 @@
 }
 
 .box{
+    --tw-bg-opacity: 1;
+    background-color: rgb(65 146 125 / var(--tw-bg-opacity));
     height:16rem;
     border-radius: 8px;
 }
