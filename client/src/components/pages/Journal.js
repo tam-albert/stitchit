@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import JournalPost from "../modules/JournalPost.js";
-import { NewEntry } from "../modules/NewInput.js";
+import { NewEntry } from "../modules/NewEntry.js";
+import { NewComment } from "../modules/NewComment.js";
 import NotFound from "./NotFound";
 
 import { get } from "../../utilities";
