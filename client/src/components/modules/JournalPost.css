@@ -2,6 +2,8 @@
     border: var(--darkgrey) 1px solid;
     border-radius: var(--xs);
     margin-top: var(--m);
+    width: 1080px;
+    background-color: white;
   }
   
   .JournalPost-container:first-of-type {
@@ -16,6 +18,7 @@
   .JournalPost-entryUser {
     font-size: 20px;
     font-weight: 600;
+    margin: 10px;
   }
   
   .JournalPost-entryContent {

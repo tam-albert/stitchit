@@ -33,7 +33,7 @@ const NewInput = (props) => {
         placeholder={props.defaultText}
         value={value}
         onChange={handleChange}
-        className="NewInput-entry"
+        className="NewInput-entry rounded-md"
       />
       <button
         type="submit"
@@ -63,14 +63,11 @@ const NewEntry = (props) => {
   };
 
   return (
-    <div>
       <div>
         <NewInput defaultText="Speak your mind... " onSubmit={addEntry} />
       </div>
-      
-      
-    </div>
   );
+
   
 };
 

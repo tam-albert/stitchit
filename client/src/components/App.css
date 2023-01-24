@@ -990,13 +990,13 @@ form {
 }
 
 .u-link {
-  color: var(--primary);
+  color: var(--secondary);
   text-decoration: none;
   cursor: pointer;
 }
 
 .u-link:hover {
-  color: var(--primary--dim);
+  color: var(--secondary--dim);
 }
 
 .placeholder\:text-2xl::-moz-placeholder{

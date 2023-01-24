@@ -1,9 +1,9 @@
 .new-bg{
     --tw-bg-opacity: 1;
-    background-color: rgb(167 216 188 / var(--tw-bg-opacity));
+    background-color: var(--tertiary);
 }
 
 .hover\:new-bg:hover{
     --tw-bg-opacity: 1;
-    background-color: rgb(144 187 164 / var(--tw-bg-opacity));
-  }
+    background-color: var(--tertiary--dim);
+}
