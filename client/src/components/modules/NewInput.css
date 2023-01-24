@@ -20,13 +20,13 @@
 }
 
 .NewInput-input:focus-within {
-  border-color: var(--primary--dim);
-  box-shadow: 0 0 0 var(--xs) rgba(115, 144, 175, 0.25);
+  border-color: var(--secondary--dim);
+  box-shadow: 0 0 0 var(--xs) rgba(130, 172, 216, 0.25);
 }
 
 .NewInput-button {
-  color: var(--primary);
-  border: var(--primary) 1px solid;
+  color: var(--secondary);
+  border: var(--secondary) 1px solid;
   border-radius: 0 var(--xs) var(--xs) 0;
   background: none;
   transition: color 0.1s, background 0.1s;
@@ -34,5 +34,5 @@
 
 .NewInput-button:hover {
   color: var(--white);
-  background-color: var(--primary);
+  background-color: var(--secondary);
 }
