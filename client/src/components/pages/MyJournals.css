@@ -1,4 +1,5 @@
 .test{
+    display: flex;
     margin: 20px;
     border-top-width: 200px;
     width: 200px;
