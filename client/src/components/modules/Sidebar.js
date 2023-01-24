@@ -23,7 +23,7 @@ const Sidebar = (props) => {
     >
       <div className="px-3 py-4 overflow-y-auto flex flex-col rounded bg-gray-100 h-full min-h-screen">
         <ul className="space-y-2 flex-grow">
-          <li>
+          <li className="Sidebar-container">
             <Link
               to="/"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-200"
