@@ -1,4 +1,5 @@
 client/dist/bundle.js
 node_modules/
+client/src/components/App.css
 .DS_Store
 .env
