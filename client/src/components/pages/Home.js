@@ -15,7 +15,7 @@ const Home = (props) => {
           placeholder="Speak your mind, add an image, or answer our daily prompt."
           maxlength="20000"
         ></textarea>
-        <div className="bg-light-pink my-1 p-4 rounded-md flex flex-row-reverse items-center">
+        <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
           <PostDialog />
         </div>
       </div>

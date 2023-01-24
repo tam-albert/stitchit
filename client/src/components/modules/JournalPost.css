@@ -18,7 +18,6 @@
   .JournalPost-entryUser {
     font-size: 20px;
     font-weight: 600;
-    margin: 10px;
   }
   
   .JournalPost-entryContent {
@@ -34,4 +33,3 @@
   .JournalPost-commentBody {
     margin: 0 0 var(--s);
   }
-  
