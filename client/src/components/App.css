@@ -574,11 +574,6 @@ video {
   margin-right: auto;
 }
 
-.my-4{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .mb-32{
   margin-bottom: 8rem;
 }
@@ -617,10 +612,6 @@ video {
 
 .h-16{
   height: 4rem;
-}
-
-.h-48{
-  height: 12rem;
 }
 
 .min-h-screen{
@@ -741,15 +732,6 @@ video {
 
 .rounded-lg{
   border-radius: 0.5rem;
-}
-
-.border-2{
-  border-width: 2px;
-}
-
-.border-gray-400{
-  --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 
 .bg-white{

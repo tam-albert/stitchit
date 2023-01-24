@@ -1,6 +1,20 @@
+
 .test {
   display: flex;
   margin: 20px;
   border-top-width: 200px;
   width: 200px;
 }
+.test{
+    display: flex;
+    margin: 20px;
+    width: 200px;
+}
+
+.box{
+    --tw-bg-opacity: 1;
+    background-color: rgb(65 146 125 / var(--tw-bg-opacity));
+    height:16rem;
+    border-radius: 8px;
+}
+

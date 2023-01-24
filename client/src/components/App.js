@@ -10,6 +10,7 @@ import Journal from "./pages/Journal";
 import MyJournals from "./pages/MyJournals";
 import Feed from "./pages/Feed";
 import Sidebar from "./modules/Sidebar";
+import Prompts from "./pages/Prompts";
 import LoggedOutNotFound from "./pages/LoggedOutNotFound";
 
 import "../utilities.css";
@@ -25,6 +26,8 @@ import { get, post } from "../utilities";
 const App = () => {
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [name, setName] = useState(null);
+  const [userBio, setUserBio] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -32,6 +35,8 @@ const App = () => {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setUserName(user.name.split(" ")[0]);
+        setName(user.name);
+        setUserBio(user.bio);
       }
     });
   }, []);
@@ -71,7 +76,8 @@ const App = () => {
                 userId={userId}
                 path="/"
               />
-              <Profile path="/profile/:userId" />
+              <Prompts path="/prompts" />
+              <Profile path="/profile/:userId" userId={userId} name={name} bio={userBio}/>
               <Journal path="/journal/:journalId" userId={userId} />
               <MyJournals path="/myjournals" />
               <Feed path="/feed" />

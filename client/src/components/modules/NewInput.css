@@ -5,16 +5,23 @@
   padding: var(--s) var(--m);
 }
 
-.NewInput-input {
-  flex-grow: 1;
+.NewInput-comment {
   border: var(--darkgrey) 1px solid;
   border-radius: var(--xs) 0 0 var(--xs);
   transition: box-shadow 0.1s;
 }
 
+.NewInput-entry {
+  height: 800px;
+  width: 1000px;
+  font-size: 20px;
+  padding: var(--s) var(--m);
+  overflow-wrap: break-word;
+}
+
 .NewInput-input:focus-within {
   border-color: var(--primary--dim);
-  box-shadow: 0 0 0 var(--xs) rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 var(--xs) rgba(115, 144, 175, 0.25);
 }
 
 .NewInput-button {
