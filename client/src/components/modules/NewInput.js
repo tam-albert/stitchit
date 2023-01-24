@@ -27,7 +27,6 @@ const NewInput = (props) => {
   };
 
   return (
-    <textarea className="rounded-md">
     <div className="u-flex">
       <input
         type="text"
@@ -45,7 +44,6 @@ const NewInput = (props) => {
         Submit
       </button>
     </div>
-    </textarea>
   );
 };
 
