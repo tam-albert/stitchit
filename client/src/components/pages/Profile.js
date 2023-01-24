@@ -13,7 +13,7 @@ const Profile = (props) => {
       <div className="Profile-avatarContainer">
         <div className="Profile-avatar" />
       </div>
-      <h1 className="Profile-name u-textCenter">{props.Name}</h1>
+      <h1 className="Profile-name u-textCenter">{props.name}</h1>
       <hr className="Profile-line" />
       <div className="u-flex">
         <div className="Profile-subContainer u-textCenter">
