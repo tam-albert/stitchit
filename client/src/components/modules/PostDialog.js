@@ -6,12 +6,21 @@ import { get } from "../../utilities";
 
 const PostDialog = (props) => {
   const [journals, setJournals] = useState([]);
+  const [activeJournalIds, setActiveJournalIds] = useState(new Set());
 
   useEffect(() => {
     get("/api/journals").then((journalObjs) => {
       setJournals(journalObjs);
     });
   }, []);
+
+  const handleCheckbox = (event) => {
+    if (event.target.checked) {
+      setActiveJournalIds(activeJournalIds.add(event.target.id));
+    } else {
+      setActiveJournalIds(new Set([...activeJournalIds].filter((id) => id !== event.target.id)));
+    }
+  };
 
   return (
     <Popover className="relative">
@@ -33,13 +42,15 @@ const PostDialog = (props) => {
             <div className="relative rounded-lg flex flex-col bg-gray-100 p-7 overflow-auto">
               <span className="text-xl font-bold mb-3">Choose journals to publish to</span>
               {journals.map((journal) => (
-                <div className="flex items-center">
+                <div key={`div-${journal._id}`} className="flex items-center">
                   <input
                     type="checkbox"
-                    key={journal.name}
+                    key={`input-${journal._id}`}
+                    id={journal._id}
                     className="text-blue-600 bg-gray-100 border-gray-300"
+                    onChange={handleCheckbox}
                   />
-                  <label className="ml-4">
+                  <label className="ml-4" key={`label-${journal._id}`}>
                     <span className="text-sm font-medium text-gray-900">{journal.name}</span>{" "}
                     <span className="text-sm text-gray-500">
                       by {journal.collaborator_names[0]}
@@ -48,7 +59,10 @@ const PostDialog = (props) => {
                 </div>
               ))}
               <div className="mt-3">
-                <button className="border-solid border-2 border-slate-400 rounded-full px-3 py-2">
+                <button
+                  className="border-solid border-2 border-slate-400 rounded-full px-3 py-2 hover:bg-white"
+                  onClick={() => props.publish(activeJournalIds)}
+                >
                   Publish!
                 </button>
               </div>
