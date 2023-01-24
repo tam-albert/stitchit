@@ -14,6 +14,7 @@ const Comment = require("./models/comment");
 const Entry = require("./models/entry");
 const Journal = require("./models/journal");
 const User = require("./models/user");
+const Prompt = require("./models/prompt");
 
 const mongoose = require("mongoose");
 
@@ -26,8 +27,9 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-router.get("/journals", (req, res) => {
+router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
+  const query = {collaborator_ids: req.query.userId}
   if (req.query.journalId) {
     try {
       const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
@@ -36,7 +38,9 @@ router.get("/journals", (req, res) => {
       res.status(404).send();
     }
   } else {
-    Journal.find().then((journals) => res.send(journals));
+    console.log(req);
+    console.log(query);
+    Journal.find(query).then((journals) => {console.log(journals); res.send(journals)});
   }
 });
 
@@ -99,7 +103,7 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
         creator_name: req.user.name,
         prompt: req.body.prompt,
         content: req.body.content,
-        journal_id: req.body.journal_id,
+        journal_id: req.body.journal,
       });
 
       newEntry.save().then((entry) => {
@@ -113,6 +117,22 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
     // Malformed journal ID
     res.status(400).send();
   }
+});
+
+router.get("/prompt", (req, res) => {
+  Prompt.find({ date: req.query.date }).then((prompts) => {
+    res.send(prompts);
+  });
+});
+
+router.post("/prompt", auth.ensureLoggedIn, (req, res) => {
+  const newPrompt = new Prompt({
+    content: req.body.content,
+    likes: req.body.likes,
+    date: req.body.date
+  });
+
+  newPrompt.save().then((prompt) => res.send(prompt));
 });
 
 router.post("/login", auth.login, (req, res) => {});

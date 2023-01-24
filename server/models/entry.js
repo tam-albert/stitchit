@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const EntrySchema = new mongoose.Schema({
   creator_id: String,
   creator_name: String,
-  prompt: String,
+  prompt_id: String,
   content: String,
   journal_id: String,
 });

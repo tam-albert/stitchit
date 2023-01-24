@@ -5,18 +5,18 @@ import { Link } from "@reach/router";
 import "./MyJournals.css";
 import { get } from "../../utilities";
 
-const MyJournals = () => {
+const MyJournals = (props) => {
   const [journals, setJournals] = useState([]);
 
   useEffect(() => {
-    get("/api/journals").then((journalObjs) => {
+    get("/api/journals", {userId: props.userId}).then((journalObjs) => {
       console.log(journalObjs);
       setJournals(journalObjs);
     });
   }, []);
 
   const journalsList = journals.map((journal) => (
-    <div className="test flex-col">
+    <div className="grid flex-col">
       <Link to={`/journal/${journal._id}`} key={journal._id}>
         <div className="w-full box"></div>
         <div className="m-4">
@@ -30,7 +30,7 @@ const MyJournals = () => {
 
   return (
     <>
-      <NewJournal />
+      <NewJournal/>
       <div className="inline-flex flex-wrap">{journalsList}</div>
     </>
   );

@@ -76,10 +76,10 @@ const App = () => {
                 userId={userId}
                 path="/"
               />
-              <Prompts path="/prompts" />
-              <Profile path="/profile/:userId" userId={userId} name={name} bio={userBio} />
+              <Prompts path="/prompts/:userId" userId={userId} />
+              <Profile path="/profile/:userId" userId={userId} name={name} bio={userBio}/>
               <Journal path="/journal/:journalId" userId={userId} />
-              <MyJournals path="/myjournals" />
+              <MyJournals path="/myjournals" userId={userId} />
               <Feed path="/feed" />
               <NotFound default />
             </Router>

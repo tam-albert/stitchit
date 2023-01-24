@@ -975,6 +975,19 @@ video {
 .bg-gray-50{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+.bg-primary{
+  --tw-bg-opacity: 1;
+  background-color: rgb(57 109 255 / var(--tw-bg-opacity));
+}
+
+.bg-secondary{
+  --tw-bg-opacity: 1;
+  background-color: rgb(65 146 125 / var(--tw-bg-opacity));
+}
+
+.bg-tertiary{
+  --tw-bg-opacity: 1;
+  background-color: rgb(167 216 188 / var(--tw-bg-opacity));
 }
 
 .p-12{
@@ -1288,13 +1301,13 @@ form {
 }
 
 .u-link {
-  color: var(--primary);
+  color: var(--secondary);
   text-decoration: none;
   cursor: pointer;
 }
 
 .u-link:hover {
-  color: var(--primary--dim);
+  color: var(--secondary--dim);
 }
 
 .placeholder\:text-2xl::-moz-placeholder{
