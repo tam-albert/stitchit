@@ -15,7 +15,7 @@
 */
 
 /* TODO: REPLACE WITH YOUR OWN FONT! */
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Serif");
+@import url("https://fonts.googleapis.com/css?family=Mukta");
 
 @tailwind base;
 @tailwind components;
@@ -38,7 +38,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "IBM Plex Serif";
+  font-family: "Mukta";
   font-weight: 300;
 }
 

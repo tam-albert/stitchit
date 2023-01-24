@@ -14,6 +14,7 @@ body {
 }
 
 .tag {
+  font-family: "IBM Plex Serif";
   border-radius: 25px;
   background: #a7d8bc;
   width: fit-content;

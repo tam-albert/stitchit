@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@400&display=swap");
 
 .Sidebar-container {
-  font-family: "Unbounded";
+  font-family: "Mukta";
   transition: 1s ease;
+  font-weight: 500;
 }
 
 .Sidebar-toggle {
