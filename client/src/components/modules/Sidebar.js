@@ -9,6 +9,7 @@ import {
   QueueListIcon,
   UserCircleIcon,
   ChevronLeftIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
 import "./Sidebar.css";
@@ -87,7 +88,11 @@ const Sidebar = (props) => {
             setMinimized(1 - minimized);
           }}
         >
-          <ChevronLeftIcon className="w-5 h-5" />
+          {minimized ? (
+            <ChevronRightIcon className="w-5 h-5" />
+          ) : (
+            <ChevronLeftIcon className="w-5 h-5" />
+          )}
         </button>
       </div>
     </aside>
