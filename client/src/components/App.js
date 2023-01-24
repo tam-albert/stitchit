@@ -26,6 +26,8 @@ import { get, post } from "../utilities";
 const App = () => {
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [name, setName] = useState(null);
+  const [userBio, setUserBio] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -33,6 +35,8 @@ const App = () => {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setUserName(user.name.split(" ")[0]);
+        setName(user.name);
+        setUserBio(user.bio);
       }
     });
   }, []);
@@ -73,7 +77,7 @@ const App = () => {
                 path="/"
               />
               <Prompts path="/prompts" />
-              <Profile path="/profile/:userId" />
+              <Profile path="/profile/:userId" userId={userId} name={name} bio={userBio}/>
               <Journal path="/journal/:journalId" userId={userId} />
               <MyJournals path="/myjournals" />
               <Feed path="/feed" />
