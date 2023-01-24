@@ -12,7 +12,7 @@ const Journal = (props) => {
 
   // Check if the journal actually exists
   useEffect(() => {
-    get("/api/journals", { journalId: props.journalId }).catch(() => {
+    get("/api/journals", { journalId: props.journalId}).catch(() => {
       setJournalExists(false);
     });
   });

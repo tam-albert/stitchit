@@ -27,8 +27,9 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-router.get("/journals", (req, res) => {
+router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
+  const query = {collaborator_ids: req.query.userId}
   if (req.query.journalId) {
     try {
       const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
@@ -37,7 +38,9 @@ router.get("/journals", (req, res) => {
       res.status(404).send();
     }
   } else {
-    Journal.find().then((journals) => res.send(journals));
+    console.log(req);
+    console.log(query);
+    Journal.find(query).then((journals) => {console.log(journals); res.send(journals)});
   }
 });
 

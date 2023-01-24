@@ -5,11 +5,11 @@ import { Link } from "@reach/router";
 import "./MyJournals.css";
 import { get } from "../../utilities";
 
-const MyJournals = () => {
+const MyJournals = (props) => {
   const [journals, setJournals] = useState([]);
 
   useEffect(() => {
-    get("/api/journals").then((journalObjs) => {
+    get("/api/journals", {userId: props.userId}).then((journalObjs) => {
       console.log(journalObjs);
       setJournals(journalObjs);
     });
