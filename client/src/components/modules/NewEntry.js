@@ -27,7 +27,7 @@ const NewInput = (props) => {
   };
 
   return (
-    <div className="u-flex">
+    <div className="u-flex m-4">
       <textarea
         type="text"
         placeholder={props.defaultText}
