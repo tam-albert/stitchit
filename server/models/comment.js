@@ -5,7 +5,6 @@ const CommentSchema = new mongoose.Schema({
   creator_id: String,
   creator_name: String,
   parent: String,
-  prompt: String,
   content: String,
 });
 
