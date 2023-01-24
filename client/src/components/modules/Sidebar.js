@@ -75,7 +75,7 @@ const Sidebar = (props) => {
             <Link className="flex w-full items-center" to={`/profile/${props.userId}`}>
               <UserCircleIcon className="w-6 h-6" />
 
-              <span className="flex-1 ml-3 truncate">
+              <span className="flex-1 ml-3 text-xl truncate">
                 <span>{props.userName}</span>
               </span>
             </Link>
