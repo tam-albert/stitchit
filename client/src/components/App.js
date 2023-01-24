@@ -69,7 +69,7 @@ const App = () => {
         <div className="flex">
           <Sidebar userId={userId} userName={userName} handleLogout={handleLogout} />
           <div className="p-12 w-full">
-            <Router>
+            <Router className="h-full">
               <Home
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}

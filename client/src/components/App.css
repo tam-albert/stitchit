@@ -540,8 +540,16 @@ video {
   position: relative;
 }
 
+.sticky{
+  position: sticky;
+}
+
 .right-0{
   right: 0px;
+}
+
+.top-0{
+  top: 0px;
 }
 
 .bottom-0{
@@ -554,6 +562,11 @@ video {
 
 .m-4{
   margin: 1rem;
+}
+
+.my-1{
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .mx-auto{
@@ -585,12 +598,12 @@ video {
   display: inline-flex;
 }
 
-.h-6{
-  height: 1.5rem;
-}
-
 .h-full{
   height: 100%;
+}
+
+.h-6{
+  height: 1.5rem;
 }
 
 .h-5{
@@ -665,6 +678,10 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.resize-none{
+  resize: none;
+}
+
 .flex-col{
   flex-direction: column;
 }
@@ -687,8 +704,8 @@ video {
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
-.overflow-y-auto{
-  overflow-y: auto;
+.overflow-x-hidden{
+  overflow-x: hidden;
 }
 
 .truncate{
@@ -732,12 +749,46 @@ video {
   background-color: rgb(254 215 170 / var(--tw-bg-opacity));
 }
 
+.bg-gray-800{
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+}
+
+.bg-light-pink{
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 205 200 / var(--tw-bg-opacity));
+}
+
+.bg-gray-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-sunflower{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 210 69 / var(--tw-bg-opacity));
+}
+
+.bg-tertiary{
+  --tw-bg-opacity: 1;
+  background-color: rgb(167 216 188 / var(--tw-bg-opacity));
+}
+
+.bg-tertiary-dim{
+  --tw-bg-opacity: 1;
+  background-color: rgb(144 187 164 / var(--tw-bg-opacity));
+}
+
 .p-12{
   padding: 3rem;
 }
 
 .p-2{
   padding: 0.5rem;
+}
+
+.p-4{
+  padding: 1rem;
 }
 
 .p-8{
@@ -901,8 +952,15 @@ video {
 }
 
 :root {
-  --primary: #41927D;
-  --primary--dim: #226C58;
+  --primary: #396dff;
+  --primary--dim: #6987db;
+  --secondary: #41927d;
+  --secondary--dim: #266858;
+  --tertiary: #a7d8bc;
+  --tertiary--dim: #90bba4;
+  --sunflower: #ffd245;
+  --light--pink: #fbcdc8;
+  --darker--pink: #f79e8c;
   --darkgrey: #d4d4d4;
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
@@ -969,6 +1027,24 @@ form {
 
 .u-link:hover {
   color: var(--primary--dim);
+}
+
+.placeholder\:text-2xl::-moz-placeholder{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.placeholder\:text-2xl::placeholder{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.placeholder\:italic::-moz-placeholder{
+  font-style: italic;
+}
+
+.placeholder\:italic::placeholder{
+  font-style: italic;
 }
 
 .hover\:bg-gray-200:hover{
