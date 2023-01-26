@@ -49,8 +49,10 @@ const Journal = (props) => {
   };
 
   const addName = (name) => {
-    setNames([...names, name]);
-    console.log(names);
+    // technically it will not show duplicate people if two ppl have the same name but that's giving edge case
+    if (!names.includes(name)) {
+      setNames([...names, name]);
+    }
   };
 
   let entriesList = null;

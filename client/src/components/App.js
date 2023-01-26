@@ -77,7 +77,7 @@ const App = () => {
                 path="/"
               />
               <Prompts path="/prompts/:userId" userId={userId} />
-              <Profile path="/profile/:userId" userId={userId} name={name} bio={userBio}/>
+              <Profile path="/profile/:userId" userId={userId} bio={userBio} />
               <Journal path="/journal/:journalId" userId={userId} />
               <MyJournals path="/myjournals" userId={userId} />
               <Feed path="/feed" />
