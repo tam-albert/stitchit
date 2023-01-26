@@ -26,6 +26,7 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const journal = require("./models/journal");
 
 router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
@@ -54,6 +55,27 @@ router.get("/journalEntries", (req, res) => {
       Entry.find({
         _id: { $in: journal.entries_list },
       }).then((entries) => res.send(entries));
+    });
+  } catch (e) {
+    res.status(404).send();
+  }
+});
+
+router.get("/journalUsers", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const journalObjectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findById(journalObjectId).then((journal) => {
+      if (!journal) {
+        res.status(400).send();
+        return;
+      }
+
+      if (!journal.collaborator_ids.includes(req.user._id)) {
+        res.status(403).send();
+        return;
+      }
+
+      res.send({ ids: journal.collaborator_ids, names: journal.collaborator_names });
     });
   } catch (e) {
     res.status(404).send();
@@ -177,6 +199,7 @@ router.post("/invite", auth.ensureLoggedIn, (req, res) => {
             if (!journal.collaborator_ids.includes(req.body.inviteId)) {
               // add only if not there already
               journal.collaborator_ids.push(req.body.inviteId);
+              journal.collaborator_names.push(user.name);
             }
 
             journal.save();

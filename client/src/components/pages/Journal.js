@@ -3,6 +3,7 @@ import JournalPost from "../modules/JournalPost.js";
 import { NewEntry } from "../modules/NewEntry.js";
 import { NewComment } from "../modules/NewComment.js";
 import InvitePrompt from "../modules/InvitePrompt.js";
+import PeopleList from "../modules/PeopleList.js";
 import NotFound from "./NotFound";
 
 import { Link } from "@reach/router";
@@ -14,6 +15,7 @@ import "./Journal.css";
 const Journal = (props) => {
   const [journalExists, setJournalExists] = useState(true);
   const [entries, setEntries] = useState([]);
+  const [names, setNames] = useState([]);
 
   // Check if the journal actually exists
   useEffect(() => {
@@ -33,10 +35,22 @@ const Journal = (props) => {
     });
   }, []);
 
+  // this could be so much more efficient
+  useEffect(() => {
+    get("/api/journalUsers", { journalId: props.journalId }).then((userObjs) => {
+      setNames(userObjs.names);
+    });
+  }, []);
+
   // this gets called when the user pushes "Submit", so their
   // post gets added to the screen right away
   const addNewEntry = (entryObj) => {
     setEntries([entryObj].concat(entries));
+  };
+
+  const addName = (name) => {
+    setNames([...names, name]);
+    console.log(names);
   };
 
   let entriesList = null;
@@ -57,8 +71,9 @@ const Journal = (props) => {
   }
   return journalExists ? (
     <div className="flex flex-col items-center">
-      <div>
-        <InvitePrompt journalId={props.journalId} />
+      <div className="flex items-center space-x-4">
+        <PeopleList names={names} />
+        <InvitePrompt journalId={props.journalId} addName={addName} />
       </div>
 
       {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}

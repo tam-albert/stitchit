@@ -28,6 +28,7 @@ const InvitePrompt = (props) => {
       .then((res) => {
         setStatusText(`Invited ${res.userName}!`);
         setStatusSuccessful(true);
+        props.addName(res.userName);
       })
       .catch(() => {
         setStatusText("Check your user ID and try again.");
@@ -39,13 +40,16 @@ const InvitePrompt = (props) => {
     <>
       {isOpen ? (
         <>
-          <div className="flex items-center">
+          <div className="flex items-center border-2 border-gray-500 rounded-md p-2">
+            <button onClick={closePrompt}>
+              <XMarkIcon className="w-6 h-6 mr-3" />
+            </button>
             <input
               type="text"
               text={inviteId}
               onChange={handleChange}
               placeholder="Enter profile ID"
-              className="text-xl"
+              className="text-xl p-1"
             />
             <button
               onClick={invite}
