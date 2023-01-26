@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import JournalPost from "../modules/JournalPost.js";
 import { NewEntry } from "../modules/NewEntry.js";
 import { NewComment } from "../modules/NewComment.js";
+import InvitePrompt from "../modules/InvitePrompt.js";
 import NotFound from "./NotFound";
 
 import { Link } from "@reach/router";
-import {
-  PlusIcon,
-} from "@heroicons/react/24/outline";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 import { get } from "../../utilities";
-import "./Journal.css"
+import "./Journal.css";
 
 const Journal = (props) => {
   const [journalExists, setJournalExists] = useState(true);
@@ -18,7 +17,7 @@ const Journal = (props) => {
 
   // Check if the journal actually exists
   useEffect(() => {
-    get("/api/journals", { journalId: props.journalId}).catch(() => {
+    get("/api/journals", { journalId: props.journalId }).catch(() => {
       setJournalExists(false);
     });
   });
@@ -57,26 +56,14 @@ const Journal = (props) => {
     entriesList = <div>Create a new entry to start journaling!</div>;
   }
   return journalExists ? (
-    <div>
-    <div >
-        <ul className="space-y-2 flex-grow overflow-x-hidden">
-          <li className="Journal-container">
-            <Link
-              to="/"
-              className="flex items-center p-2 text-lg font-normal text-gray-900 rounded-lg hover:bg-gray-200"
-            >
-              <PlusIcon className="w-6 h-6" />
-              <span className="flex-1 ml-3 whitespace-nowrap">Invite Friends</span>
-            </Link>
-          </li>
-        </ul>
-    </div>
-        <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center">
+      <div>
+        <InvitePrompt journalId={props.journalId} />
+      </div>
+
       {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}
       {entriesList}
     </div>
-    </div>
-    
   ) : (
     <NotFound />
   );

@@ -16,8 +16,8 @@ const MyJournals = (props) => {
   }, []);
 
   const journalsList = journals.map((journal) => (
-    <div className="grid flex-col">
-      <Link to={`/journal/${journal._id}`} key={journal._id}>
+    <div className="grid flex-col" key={journal._id}>
+      <Link to={`/journal/${journal._id}`}>
         <div className="w-full box"></div>
         <div className="m-4">
           {journal.name} <span className="text-gray-500">by {journal.collaborator_names[0]}</span>
