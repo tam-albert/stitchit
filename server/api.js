@@ -83,12 +83,11 @@ router.get("/journalUsers", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
-  console.log("damn...");
   const newJournal = new Journal({
     collaborator_ids: [req.user._id],
     collaborator_names: [req.user.name],
     entries_list: [],
-    name: req.body.name,
+    name: req.body.name === "" ? "Untitled Journal" : req.body.name,
   });
 
   newJournal.save().then((journal) => res.send(journal));
