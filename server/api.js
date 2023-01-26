@@ -155,6 +155,52 @@ router.get("/user", (req, res) => {
   });
 });
 
+router.post("/invite", auth.ensureLoggedIn, (req, res) => {
+  // Validate invite ID
+  try {
+    const userObjectId = new mongoose.mongo.ObjectID(req.body.inviteId);
+    User.findById(userObjectId).then((user) => {
+      if (!user) {
+        // User ID doesn't exist
+        res.status(400).send();
+        return;
+      }
+
+      // Now we have a user to invite, so we find journal
+      try {
+        const journalObjectId = new mongoose.mongo.ObjectID(req.body.journalId);
+        Journal.findById(journalObjectId).then((journal) => {
+          console.log(journalObjectId);
+          console.log(journal);
+          // make sure owner is in journal
+          if (journal.collaborator_ids.includes(req.user._id)) {
+            if (!journal.collaborator_ids.includes(req.body.inviteId)) {
+              // add only if not there already
+              journal.collaborator_ids.push(req.body.inviteId);
+            }
+
+            journal.save();
+            console.log("we are successful");
+            res.send({ userName: user.name });
+            return;
+          } else {
+            res.status(403).send();
+            return;
+          }
+        });
+      } catch (e) {
+        // journal id invalid
+        res.status(400).send();
+        return;
+      }
+    });
+  } catch (e) {
+    // was not a valid ObjectId
+    res.status(400).send();
+    return;
+  }
+});
+
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
   if (req.user)

@@ -9,10 +9,10 @@ import "./JournalPost.css";
  * JournalPost is a component for displaying content like entries
  *
  * Proptypes
- * @param {string} _id 
+ * @param {string} _id
  * @param {string} creator_name
  * @param {string} creator_id
- * @param {string} content 
+ * @param {string} content
  */
 const JournalPost = (props) => {
   const [comments, setComments] = useState([]);
