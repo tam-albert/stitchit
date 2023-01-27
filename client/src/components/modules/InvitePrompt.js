@@ -49,11 +49,11 @@ const InvitePrompt = (props) => {
               text={inviteId}
               onChange={handleChange}
               placeholder="Enter profile ID"
-              className="text-xl p-1"
+              className="text-lg pl-1"
             />
             <button
               onClick={invite}
-              className="ml-3 rounded-md bg-gray-800 text-white px-3 py-1 bg-opacity-80 hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              className="ml-3 rounded-md bg-gray-800 text-white px-3 h-7 bg-opacity-80 hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
               Invite
             </button>

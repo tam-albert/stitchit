@@ -29,7 +29,7 @@ const MyJournals = (props) => {
   return (
     <div className="p-12">
       <NewJournal />
-      <div className="inline-flex flex-wrap">{journalsList}</div>
+      <div className="inline-flex flex-wrap mt-4">{journalsList}</div>
     </div>
   );
 };
