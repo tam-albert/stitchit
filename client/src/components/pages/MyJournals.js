@@ -10,7 +10,6 @@ const MyJournals = (props) => {
 
   useEffect(() => {
     get("/api/journals").then((journalObjs) => {
-      console.log(journalObjs);
       setJournals(journalObjs);
     });
   }, []);
@@ -25,8 +24,6 @@ const MyJournals = (props) => {
       </Link>
     </div>
   ));
-
-  console.log(journals);
 
   return (
     <div className="p-12">
