@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ProfileNameCard from "../modules/ProfileNameCard.js";
 
 import { get } from "../../utilities.js";
 
@@ -12,10 +13,11 @@ const Profile = (props) => {
     get("/api/user", { userid: props.userId }).then((user) => {
       setName(user.name);
     });
-  }, []);
+  }, [props.userId]);
 
   return (
     <>
+      <ProfileNameCard name={name} userId={props.userId} />
       <div className="Profile-avatarContainer">
         <div className="Profile-avatar" />
       </div>
