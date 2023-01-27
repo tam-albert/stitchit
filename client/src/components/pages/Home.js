@@ -24,7 +24,7 @@ const Home = (props) => {
 
   return (
     <>
-      <div className="px-4 h-full flex flex-col">
+      <div className="px-16 py-12 h-full flex flex-col">
         <textarea
           className="w-full grow p-4 resize-none rounded-md text-lg placeholder:italic placeholder:text-2xl"
           placeholder="Speak your mind, add an image, or answer our daily prompt."

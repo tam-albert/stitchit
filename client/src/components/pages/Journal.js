@@ -71,18 +71,22 @@ const Journal = (props) => {
   } else {
     entriesList = <div>Create a new entry to start journaling!</div>;
   }
-  return journalExists ? (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center space-x-4">
-        <PeopleList names={names} />
-        <InvitePrompt journalId={props.journalId} addName={addName} />
-      </div>
+  return (
+    <div className="p-12">
+      {journalExists ? (
+        <div className="flex flex-col items-center">
+          <div className="flex items-center space-x-4">
+            <PeopleList names={names} />
+            <InvitePrompt journalId={props.journalId} addName={addName} />
+          </div>
 
-      {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}
-      {entriesList}
+          {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}
+          {entriesList}
+        </div>
+      ) : (
+        <NotFound />
+      )}
     </div>
-  ) : (
-    <NotFound />
   );
 };
 
