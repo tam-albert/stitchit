@@ -24,6 +24,7 @@ const NewJournal = () => {
       <input
         type="text"
         placeholder="Journal name"
+        maxlength="50"
         value={journalName}
         className="pl-2"
         onChange={handleChange}

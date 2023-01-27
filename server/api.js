@@ -83,6 +83,7 @@ router.get("/journalUsers", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
+  if (req.body.name.length > 50) res.status(400).send("Journal name too long");
   const newJournal = new Journal({
     collaborator_ids: [req.user._id],
     collaborator_names: [req.user.name],
