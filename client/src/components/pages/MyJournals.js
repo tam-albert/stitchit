@@ -19,7 +19,8 @@ const MyJournals = (props) => {
       <Link to={`/journal/${journal._id}`}>
         <div className="w-full box"></div>
         <div className="m-4">
-          {journal.name} <span className="text-gray-500">by {journal.collaborator_names[0]}</span>
+          <p>{journal.name}</p>{" "}
+          <span className="text-gray-500">by {journal.collaborator_names[0]}</span>
         </div>
       </Link>
     </div>
