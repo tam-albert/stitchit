@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 
+import { get } from "../../utilities.js";
+
 import "../../utilities.css";
 import "./Profile.css";
 
 const Profile = (props) => {
+  const [name, setName] = useState("");
   useEffect(() => {
     document.title = "Profile Page";
+    get("/api/user", { userid: props.userId }).then((user) => {
+      setName(user.name);
+    });
   }, []);
 
   return (
@@ -13,7 +19,7 @@ const Profile = (props) => {
       <div className="Profile-avatarContainer">
         <div className="Profile-avatar" />
       </div>
-      <h1 className="Profile-name u-textCenter">{props.name}</h1>
+      <h1 className="Profile-name u-textCenter">{name}</h1>
       <hr className="Profile-line" />
       <div className="u-flex">
         <div className="Profile-subContainer u-textCenter">
@@ -24,6 +30,5 @@ const Profile = (props) => {
     </>
   );
 };
-
 
 export default Profile;

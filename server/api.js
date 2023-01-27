@@ -26,6 +26,7 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const journal = require("./models/journal");
 
 router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
@@ -60,13 +61,33 @@ router.get("/journalEntries", (req, res) => {
   }
 });
 
+router.get("/journalUsers", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const journalObjectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findById(journalObjectId).then((journal) => {
+      if (!journal) {
+        res.status(400).send();
+        return;
+      }
+
+      if (!journal.collaborator_ids.includes(req.user._id)) {
+        res.status(403).send();
+        return;
+      }
+
+      res.send({ ids: journal.collaborator_ids, names: journal.collaborator_names });
+    });
+  } catch (e) {
+    res.status(404).send();
+  }
+});
+
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
-  console.log("damn...");
   const newJournal = new Journal({
     collaborator_ids: [req.user._id],
     collaborator_names: [req.user.name],
     entries_list: [],
-    name: req.body.name,
+    name: req.body.name === "" ? "Untitled Journal" : req.body.name,
   });
 
   newJournal.save().then((journal) => res.send(journal));
@@ -153,6 +174,53 @@ router.get("/user", (req, res) => {
   User.findById(req.query.userid).then((user) => {
     res.send(user);
   });
+});
+
+router.post("/invite", auth.ensureLoggedIn, (req, res) => {
+  // Validate invite ID
+  try {
+    const userObjectId = new mongoose.mongo.ObjectID(req.body.inviteId);
+    User.findById(userObjectId).then((user) => {
+      if (!user) {
+        // User ID doesn't exist
+        res.status(400).send();
+        return;
+      }
+
+      // Now we have a user to invite, so we find journal
+      try {
+        const journalObjectId = new mongoose.mongo.ObjectID(req.body.journalId);
+        Journal.findById(journalObjectId).then((journal) => {
+          console.log(journalObjectId);
+          console.log(journal);
+          // make sure owner is in journal
+          if (journal.collaborator_ids.includes(req.user._id)) {
+            if (!journal.collaborator_ids.includes(req.body.inviteId)) {
+              // add only if not there already
+              journal.collaborator_ids.push(req.body.inviteId);
+              journal.collaborator_names.push(user.name);
+            }
+
+            journal.save();
+            console.log("we are successful");
+            res.send({ userName: user.name });
+            return;
+          } else {
+            res.status(403).send();
+            return;
+          }
+        });
+      } catch (e) {
+        // journal id invalid
+        res.status(400).send();
+        return;
+      }
+    });
+  } catch (e) {
+    // was not a valid ObjectId
+    res.status(400).send();
+    return;
+  }
 });
 
 router.post("/initsocket", (req, res) => {
