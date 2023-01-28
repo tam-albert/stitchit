@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../../utilities";
+import ImageUpload from "./ImageUpload.js";
 
 const ProfileNameCard = (props) => {
   const [commonJournals, setCommonJournals] = useState([]);
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+
   useEffect(() => {
     get("/api/journals").then((journalObjs) => {
       setCommonJournals(
@@ -10,15 +13,24 @@ const ProfileNameCard = (props) => {
       );
     });
   }, [props.profileId]);
+
+  const openImageModal = () => {
+    setImageModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setImageModalOpen(false);
+  };
+
   return (
     <div className="top-0 left-0 -z-10 bg-gradient-to-l from-cyan-300 to-blue-700 w-full h-64 flex flex-col">
       <div className="grow"></div>
       <div className="flex">
         <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16">
-          <img
-            src="https://cdn.mos.cms.futurecdn.net/39CUYMP8vJqHAYGVzUghBX-1200-80.jpg"
-            className="object-cover w-full h-full"
-          />
+          <button className="w-full h-full" onClick={openImageModal}>
+            <img src="https://i.imgur.com/U3MN5eW.png" />
+          </button>
+          <ImageUpload isOpen={imageModalOpen} closeModal={closeImageModal} />
         </div>
         <div className="p-4 ml-4 flex flex-col space-y-2">
           <div className="grow"></div>
