@@ -71,9 +71,9 @@ const ImageUpload = (props) => {
                     type="file"
                     accept="image/*"
                     className="text-base bg-neutral-100 rounded-full
-                        file:mr-2 file:cursor-pointer file:bg-gray-300 file:py-2 file:px-4
+                        file:mr-2 file:cursor-pointer file:bg-secondary file:text-white file:py-2 file:px-4
                         file:rounded-full file:border-none file:duration-100
-                        file:hover:bg-secondary file:hover:text-white"
+                        file:hover:bg-secondary-dim"
                     onChange={handleFileChange}
                   />
                 </div>
@@ -82,8 +82,10 @@ const ImageUpload = (props) => {
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-full border border-primary px-4 py-2 text-base font-medium text-primary duration-100
-                    hover:bg-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    disabled:text-neutral-500 disabled:border disabled:border-neutral-500 enabled:hover:bg-primary enabled:hover:text-white
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={handleSubmit}
+                    disabled={!image}
                   >
                     Upload
                   </button>
