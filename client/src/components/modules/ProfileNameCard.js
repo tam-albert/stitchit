@@ -27,10 +27,16 @@ const ProfileNameCard = (props) => {
       <div className="grow"></div>
       <div className="flex">
         <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16">
-          <button className="w-full h-full" onClick={openImageModal}>
-            <img src={props.pfpUrl} />
-          </button>
-          <ImageUpload isOpen={imageModalOpen} closeModal={closeImageModal} />
+          {props.profileId === props.userId ? (
+            <>
+              <button className="w-full h-full" onClick={openImageModal}>
+                <img src={props.pfpUrl} />
+              </button>
+              <ImageUpload isOpen={imageModalOpen} closeModal={closeImageModal} />
+            </>
+          ) : (
+            <img src={props.pfpUrl} className="w-full h-full object-cover" />
+          )}
         </div>
         <div className="p-4 ml-4 flex flex-col space-y-2">
           <div className="grow"></div>
