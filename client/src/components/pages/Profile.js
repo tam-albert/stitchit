@@ -10,14 +10,14 @@ const Profile = (props) => {
   const [name, setName] = useState("");
   useEffect(() => {
     document.title = "Profile Page";
-    get("/api/user", { userid: props.userId }).then((user) => {
+    get("/api/user", { userid: props.profileId }).then((user) => {
       setName(user.name);
     });
-  }, [props.userId]);
+  }, [props.profileId]);
 
   return (
     <>
-      <ProfileNameCard name={name} userId={props.userId} />
+      <ProfileNameCard name={name} profileId={props.profileId} userId={props.userId} />
       <div className="Profile-avatarContainer">
         <div className="Profile-avatar" />
       </div>

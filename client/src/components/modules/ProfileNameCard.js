@@ -6,10 +6,10 @@ const ProfileNameCard = (props) => {
   useEffect(() => {
     get("/api/journals").then((journalObjs) => {
       setCommonJournals(
-        journalObjs.filter((journal) => journal.collaborator_ids.includes(props.userId))
+        journalObjs.filter((journal) => journal.collaborator_ids.includes(props.profileId))
       );
     });
-  }, [props.userId]);
+  }, [props.profileId]);
   return (
     <div className="top-0 left-0 -z-10 bg-gradient-to-l from-cyan-300 to-blue-700 w-full h-64 flex flex-col">
       <div className="grow"></div>
@@ -23,15 +23,19 @@ const ProfileNameCard = (props) => {
         <div className="p-4 ml-4 flex flex-col space-y-2">
           <div className="grow"></div>
           <p className="text-4xl text-white font-bold">{props.name}</p>
-          <p className="text-base text-white">
-            <span className="italic">Journals in common:</span>{" "}
-            {commonJournals.length > 3
-              ? `${commonJournals
-                  .map((journal) => journal.name)
-                  .slice(0, 3)
-                  .join(", ")} +${commonJournals.length - 3} more`
-              : commonJournals.map((journal) => journal.name).join(", ")}
-          </p>
+          {props.profileId !== props.userId ? (
+            <p className="text-base text-white">
+              <span className="italic">Journals in common:</span>{" "}
+              {commonJournals.length > 3
+                ? `${commonJournals
+                    .map((journal) => journal.name)
+                    .slice(0, 3)
+                    .join(", ")} +${commonJournals.length - 3} more`
+                : commonJournals.map((journal) => journal.name).join(", ")}
+            </p>
+          ) : (
+            <p className="text-base text-white">That's you!</p>
+          )}
         </div>
       </div>
     </div>
