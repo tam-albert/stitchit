@@ -1,11 +1,38 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+
+import { get, post } from "../../utilities.js";
 
 // Returns a modal photo dialog for user to upload photo
 // Also takes a setImageUrl function in props so that it can pass the GCS URL to parent
 
 const ImageUpload = (props) => {
+  const [image, setImage] = useState(null);
+
+  const handleFileChange = (event) => {
+    if (event.target.files) {
+      setImage(event.target.files[0]);
+    }
+  };
+
+  const handleSubmit = () => {
+    props.closeModal();
+    get("/api/images/signedurl").then((res) => {
+      const presignedUrl = res.url;
+      fetch(presignedUrl, {
+        method: "PUT",
+        body: image,
+      }).then(() => {
+        post("/api/images/updatepfp", {
+          pfpUrl: `https://stitch-it-profile-upload.s3.us-east-1.amazonaws.com/${res.key}`,
+        });
+      });
+    });
+    // get S3 signed URL (API endpoint)
+    // put to signed URL (not OUR API endpoint)
+  };
+
   return (
     <Transition appear show={props.isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={props.closeModal}>
@@ -46,15 +73,17 @@ const ImageUpload = (props) => {
                     className="text-base bg-neutral-100 rounded-full
                         file:mr-2 file:cursor-pointer file:bg-gray-300 file:py-2 file:px-4
                         file:rounded-full file:border-none file:duration-100
-                        file:hover:bg-primary file:hover:text-white"
+                        file:hover:bg-secondary file:hover:text-white"
+                    onChange={handleFileChange}
                   />
                 </div>
 
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-base font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={props.closeModal}
+                    className="inline-flex justify-center rounded-full border border-primary px-4 py-2 text-base font-medium text-primary duration-100
+                    hover:bg-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    onClick={handleSubmit}
                   >
                     Upload
                   </button>

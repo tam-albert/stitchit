@@ -8,16 +8,24 @@ import "./Profile.css";
 
 const Profile = (props) => {
   const [name, setName] = useState("");
+  const [pfpUrl, setPfpUrl] = useState("");
+
   useEffect(() => {
     document.title = "Profile Page";
     get("/api/user", { userid: props.profileId }).then((user) => {
       setName(user.name);
+      setPfpUrl(user.pfp);
     });
   }, [props.profileId]);
 
   return (
     <>
-      <ProfileNameCard name={name} profileId={props.profileId} userId={props.userId} />
+      <ProfileNameCard
+        name={name}
+        pfpUrl={pfpUrl}
+        profileId={props.profileId}
+        userId={props.userId}
+      />
       <div className="Profile-avatarContainer">
         <div className="Profile-avatar" />
       </div>

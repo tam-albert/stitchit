@@ -26,7 +26,15 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
-const journal = require("./models/journal");
+
+// initialize AWS S3 instance
+const { S3Client, GetObjectCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
+const AWS_REGION = "us-east-1";
+const PROFILE_BUCKET_NAME = "stitch-it-profile-upload";
+const client = new S3Client({ region: AWS_REGION });
+
+const { v4: uuidv4 } = require("uuid");
 
 router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
@@ -39,10 +47,7 @@ router.get("/journals", auth.ensureLoggedIn, (req, res) => {
       res.status(404).send();
     }
   } else {
-    console.log(req);
-    console.log(query);
     Journal.find(query).then((journals) => {
-      console.log(journals);
       res.send(journals);
     });
   }
@@ -192,8 +197,6 @@ router.post("/invite", auth.ensureLoggedIn, (req, res) => {
       try {
         const journalObjectId = new mongoose.mongo.ObjectID(req.body.journalId);
         Journal.findById(journalObjectId).then((journal) => {
-          console.log(journalObjectId);
-          console.log(journal);
           // make sure owner is in journal
           if (journal.collaborator_ids.includes(req.user._id)) {
             if (!journal.collaborator_ids.includes(req.body.inviteId)) {
@@ -203,7 +206,6 @@ router.post("/invite", auth.ensureLoggedIn, (req, res) => {
             }
 
             journal.save();
-            console.log("we are successful");
             res.send({ userName: user.name });
             return;
           } else {
@@ -229,6 +231,43 @@ router.post("/initsocket", (req, res) => {
   if (req.user)
     socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
   res.send({});
+});
+
+router.get("/images/signedurl", auth.ensureLoggedIn, (req, res) => {
+  const uuid = uuidv4();
+  const bucketParams = {
+    Bucket: PROFILE_BUCKET_NAME,
+    Key: uuid,
+    ACL: "public-read",
+  };
+
+  const command = new PutObjectCommand(bucketParams);
+  getSignedUrl(client, command, { expiresIn: 3600 })
+    .then((url) => {
+      res.send({ url: url, key: uuid });
+    })
+    .catch((err) => {
+      res.status(500).send({ msg: err });
+    });
+});
+
+router.post("/images/updatepfp", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const userObjectId = new mongoose.mongo.ObjectID(req.user._id);
+    User.findById(userObjectId).then((user) => {
+      if (!user) {
+        res.status(400).send({ msg: "wtf are you doing??" });
+        return;
+      }
+
+      user.pfp = req.body.pfpUrl;
+      user.save().then(() => {
+        res.send({ url: req.body.pfpUrl });
+      });
+    });
+  } catch (e) {
+    res.status(400).send({ msg: "This really should not have happened lmfao" });
+  }
 });
 
 router.all("*", (req, res) => {

@@ -28,7 +28,7 @@ const ProfileNameCard = (props) => {
       <div className="flex">
         <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16">
           <button className="w-full h-full" onClick={openImageModal}>
-            <img src="https://i.imgur.com/U3MN5eW.png" />
+            <img src={props.pfpUrl} />
           </button>
           <ImageUpload isOpen={imageModalOpen} closeModal={closeImageModal} />
         </div>
