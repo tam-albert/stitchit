@@ -8,7 +8,7 @@ import "./Home.css";
 
 const Home = (props) => {
   const [text, setText] = useState(
-    props.location.state.content ? props.location.state.content : ""
+    props.location?.state?.content ? props.location?.state?.content : ""
   );
 
   const navigate = useNavigate();
@@ -23,9 +23,9 @@ const Home = (props) => {
       const body = { content: text, journal_id: id };
       post("/api/entry", body).then(() => {
         console.log(`Published entry to journal with ID ${id}`);
-        if (props.location.state.draftId) {
+        if (props.location?.state?.draftId) {
           // Remove draft from existence once it's published
-          fetch(`/api/draft/?draftId=${props.location.state.draftId}`, {
+          fetch(`/api/draft/?draftId=${props.location?.state?.draftId}`, {
             method: "DELETE",
             headers: { "Content-type": "application/json" },
           });
@@ -42,7 +42,7 @@ const Home = (props) => {
   };
 
   const saveToDraft = () => {
-    const body = { draftId: props.location.state.draftId, content: text };
+    const body = { draftId: props.location?.state?.draftId, content: text };
     fetch("/api/draft", {
       method: "put",
       headers: { "Content-type": "application/json" },
@@ -66,7 +66,7 @@ const Home = (props) => {
         ></textarea>
         <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
           <PostDialog publish={publish} />
-          {props.location.state.draftId ? (
+          {props.location?.state?.draftId ? (
             <button
               className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
             hover:bg-gray-200"
