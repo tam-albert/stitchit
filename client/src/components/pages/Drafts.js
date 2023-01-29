@@ -15,6 +15,7 @@ const Drafts = (props) => {
         {drafts.map((draft) => (
           <SingleDraft
             key={`draft-${draft._id}`}
+            draftId={draft._id}
             content={draft.content}
             creatorId={draft.creator_id}
             timeCreated={draft.time_created}

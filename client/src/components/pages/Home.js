@@ -7,7 +7,9 @@ import "../../utilities.css";
 import "./Home.css";
 
 const Home = (props) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(
+    props.location.state.content ? props.location.state.content : ""
+  );
 
   const navigate = useNavigate();
 
@@ -40,7 +42,9 @@ const Home = (props) => {
           placeholder="Speak your mind, add an image, or answer our daily prompt."
           maxLength="20000"
           onChange={handleChange}
-        ></textarea>
+        >
+          {text}
+        </textarea>
         <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
           <PostDialog publish={publish} />
           <button
