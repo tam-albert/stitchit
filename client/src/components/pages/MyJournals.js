@@ -18,7 +18,7 @@ const MyJournals = (props) => {
     <div className="grid flex-col" key={journal._id}>
       <Link to={`/journal/${journal._id}`}>
         {journal.cover_photo_url ? (
-          <img src={journal.cover_photo_url} className="object-cover h-64" />
+          <img src={journal.cover_photo_url} className="object-cover w-full h-64" />
         ) : (
           <div className="w-full box"></div>
         )}
