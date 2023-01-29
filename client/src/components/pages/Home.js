@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import PostDialog from "../modules/PostDialog";
 import { post } from "../../utilities";
+import { useNavigate } from "@reach/router";
 
 import "../../utilities.css";
 import "./Home.css";
 
 const Home = (props) => {
   const [text, setText] = useState("");
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -25,7 +28,7 @@ const Home = (props) => {
   const saveAsDraft = () => {
     const body = { content: text };
     post("/api/draft", body).then(() => {
-      console.log("Saved as draft");
+      navigate(`/drafts`);
     });
   };
 
