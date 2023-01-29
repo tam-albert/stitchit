@@ -18,20 +18,21 @@ const Home = (props) => {
     console.log(text);
   };
 
-  const publish = (journalIds) => {
-    journalIds.forEach((id) => {
-      const body = { content: text, journal_id: id };
-      post("/api/entry", body).then(() => {
+  const publish = async (journalIds) => {
+    await Promise.all(
+      journalIds.map(async (id) => {
+        const body = { content: text, journal_id: id };
+        await post("/api/entry", body);
         console.log(`Published entry to journal with ID ${id}`);
         if (props.location?.state?.draftId) {
           // Remove draft from existence once it's published
-          fetch(`/api/draft/?draftId=${props.location?.state?.draftId}`, {
+          await fetch(`/api/draft/?draftId=${props.location?.state?.draftId}`, {
             method: "DELETE",
             headers: { "Content-type": "application/json" },
           });
         }
-      });
-    });
+      })
+    );
   };
 
   const saveAsNewDraft = () => {

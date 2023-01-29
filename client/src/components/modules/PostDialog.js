@@ -1,12 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
+import { useNavigate } from "@reach/router";
 
 import { get } from "../../utilities";
 
 const PostDialog = (props) => {
   const [journals, setJournals] = useState([]);
   const [activeJournalIds, setActiveJournalIds] = useState(new Set());
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     get("/api/journals").then((journalObjs) => {
@@ -20,6 +23,17 @@ const PostDialog = (props) => {
     } else {
       setActiveJournalIds(new Set([...activeJournalIds].filter((id) => id !== event.target.id)));
     }
+  };
+
+  const handleSubmit = () => {
+    props.publish(activeJournalIds).then(() => {
+      if (activeJournalIds.size === 1) {
+        console.log("hi");
+        navigate(`/journal/${[...activeJournalIds][0]}`);
+      } else if (activeJournalIds.size > 1) {
+        navigate("/myjournals");
+      }
+    });
   };
 
   return (
@@ -61,7 +75,7 @@ const PostDialog = (props) => {
               <div className="mt-3">
                 <button
                   className="border-solid border-2 border-slate-400 rounded-full px-3 py-2 hover:bg-white"
-                  onClick={() => props.publish(activeJournalIds)}
+                  onClick={handleSubmit}
                 >
                   Publish!
                 </button>
