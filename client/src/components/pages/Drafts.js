@@ -17,16 +17,20 @@ const Drafts = (props) => {
   return (
     <div className="p-12">
       <div className="flex flex-col-reverse space-y-4 space-y-reverse">
-        {drafts.map((draft) => (
-          <SingleDraft
-            key={`draft-${draft._id}`}
-            draftId={draft._id}
-            content={draft.content}
-            creatorId={draft.creator_id}
-            timeCreated={draft.time_created}
-            removeFromParent={removeDraft}
-          />
-        ))}
+        {drafts.length ? (
+          drafts.map((draft) => (
+            <SingleDraft
+              key={`draft-${draft._id}`}
+              draftId={draft._id}
+              content={draft.content}
+              creatorId={draft.creator_id}
+              timeCreated={draft.time_created}
+              removeFromParent={removeDraft}
+            />
+          ))
+        ) : (
+          <span className="italic text-lg text-center">You don't have any drafts right now.</span>
+        )}
       </div>
     </div>
   );
