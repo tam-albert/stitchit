@@ -15,6 +15,7 @@ const Entry = require("./models/entry");
 const Journal = require("./models/journal");
 const User = require("./models/user");
 const Prompt = require("./models/prompt");
+const Draft = require("./models/draft");
 
 const mongoose = require("mongoose");
 
@@ -142,6 +143,51 @@ router.post("/prompt", auth.ensureLoggedIn, (req, res) => {
   });
 
   newPrompt.save().then((prompt) => res.send(prompt));
+});
+
+router.get("/draft", auth.ensureLoggedIn, (req, res) => {
+  Draft.find({ creator_id: req.user._id }).then((drafts) => {
+    res.send(drafts);
+  });
+});
+
+router.post("/draft", auth.ensureLoggedIn, (req, res) => {
+  const newDraft = new Draft({
+    creator_id: req.user._id,
+    content: req.body.content,
+  });
+
+  newDraft.save().then((draft) => res.send(draft));
+});
+
+router.put("/draft", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const draftObjectId = new mongoose.mongo.ObjectID(req.body.draftId);
+    Draft.findById(draftObjectId).then((draft) => {
+      if (draft.creator_id !== req.user._id) {
+        res.status(403).send({ msg: "this is not ur draft" });
+        return;
+      }
+      draft.content = req.body.content;
+      draft.save();
+      res.send(req.body.content);
+    });
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
+router.delete("/draft", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const draftObjectId = new mongoose.mongo.ObjectID(req.query.draftId);
+    Draft.findOneAndDelete({ _id: draftObjectId, creator_id: req.user._id })
+      .then((draft) => {
+        res.send(draft);
+      })
+      .catch((err) => res.send({ msg: err }));
+  } catch (e) {
+    res.status(400).send();
+  }
 });
 
 router.post("/login", auth.login, (req, res) => {});
