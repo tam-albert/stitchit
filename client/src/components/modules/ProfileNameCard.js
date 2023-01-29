@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { get } from "../../utilities";
+import { get, post } from "../../utilities";
 import ImageUpload from "./ImageUpload.js";
 
 const ProfileNameCard = (props) => {
@@ -23,6 +23,12 @@ const ProfileNameCard = (props) => {
     setImageModalOpen(false);
   };
 
+  const updatePfp = (url) => {
+    post("/api/images/updatepfp", {
+      pfpUrl: url,
+    });
+  };
+
   return (
     <div className="top-0 left-0 -z-10 bg-gradient-to-l from-cyan-300 to-blue-700 w-full h-64 flex flex-col">
       <div className="grow"></div>
@@ -39,7 +45,11 @@ const ProfileNameCard = (props) => {
               onClick={openImageModal}
             />
 
-            <ImageUpload isOpen={imageModalOpen} closeModal={closeImageModal} />
+            <ImageUpload
+              isOpen={imageModalOpen}
+              closeModal={closeImageModal}
+              handleImageUrl={updatePfp}
+            />
           </div>
         ) : (
           <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16">

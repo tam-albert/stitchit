@@ -270,6 +270,31 @@ router.post("/images/updatepfp", auth.ensureLoggedIn, (req, res) => {
   }
 });
 
+router.post("/images/updatecoverphoto", auth.ensureLoggedIn, (req, res) => {
+  // need to add handling to make sure you're not updating a random journal's cover photo
+  try {
+    const journalObjectId = new mongoose.mongo.ObjectID(req.body.journalId);
+    console.log(journalObjectId);
+    Journal.findById(journalObjectId).then((journal) => {
+      if (!journal) {
+        res.status(400).send({ msg: "wtf are you doing??" });
+        return;
+      }
+
+      if (!journal.collaborator_ids.includes(req.user._id)) {
+        res.status(403).send({ msg: "this aint ur journal" });
+      }
+
+      journal.cover_photo_url = req.body.photoUrl;
+      journal.save().then(() => {
+        res.send({ url: req.body.photoUrl });
+      });
+    });
+  } catch (e) {
+    res.status(400).send({ msg: "This really should not have happened lmfao" });
+  }
+});
+
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
   res.status(404).send({ msg: "API route not found" });
