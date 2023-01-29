@@ -19,9 +19,13 @@ const Journal = (props) => {
 
   // Check if the journal actually exists
   useEffect(() => {
-    get("/api/journals", { journalId: props.journalId }).catch(() => {
-      setJournalExists(false);
-    });
+    get("/api/journals", { journalId: props.journalId })
+      .then((journal) => {
+        setNames(journal.collaborator_names);
+      })
+      .catch(() => {
+        setJournalExists(false);
+      });
   });
 
   // called when the "Journal" component "mounts", i.e.
@@ -32,13 +36,6 @@ const Journal = (props) => {
       console.log(entryObjs);
       let reversedEntryObjs = entryObjs.reverse();
       setEntries(reversedEntryObjs);
-    });
-  }, []);
-
-  // this could be so much more efficient
-  useEffect(() => {
-    get("/api/journalUsers", { journalId: props.journalId }).then((userObjs) => {
-      setNames(userObjs.names);
     });
   }, []);
 

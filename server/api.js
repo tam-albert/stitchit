@@ -66,27 +66,6 @@ router.get("/journalEntries", (req, res) => {
   }
 });
 
-router.get("/journalUsers", auth.ensureLoggedIn, (req, res) => {
-  try {
-    const journalObjectId = new mongoose.mongo.ObjectID(req.query.journalId);
-    Journal.findById(journalObjectId).then((journal) => {
-      if (!journal) {
-        res.status(400).send();
-        return;
-      }
-
-      if (!journal.collaborator_ids.includes(req.user._id)) {
-        res.status(403).send();
-        return;
-      }
-
-      res.send({ ids: journal.collaborator_ids, names: journal.collaborator_names });
-    });
-  } catch (e) {
-    res.status(404).send();
-  }
-});
-
 router.post("/newjournal", auth.ensureLoggedIn, (req, res) => {
   if (req.body.name.length > 50) res.status(400).send("Journal name too long");
   const newJournal = new Journal({
