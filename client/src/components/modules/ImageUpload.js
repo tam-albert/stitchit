@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
-import { get, post } from "../../utilities.js";
+import { get } from "../../utilities.js";
 
 // Returns a modal photo dialog for user to upload photo
 // Also takes a setImageUrl function in props so that it can pass the GCS URL to parent
@@ -24,9 +24,9 @@ const ImageUpload = (props) => {
         method: "PUT",
         body: image,
       }).then(() => {
-        post("/api/images/updatepfp", {
-          pfpUrl: `https://stitch-it-profile-upload.s3.us-east-1.amazonaws.com/${res.key}`,
-        });
+        props.handleImageUrl(
+          `https://stitch-it-profile-upload.s3.us-east-1.amazonaws.com/${res.key}`
+        );
       });
     });
     // get S3 signed URL (API endpoint)

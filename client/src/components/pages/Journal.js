@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import JournalPost from "../modules/JournalPost.js";
 import { NewEntry } from "../modules/NewEntry.js";
-import { NewComment } from "../modules/NewComment.js";
 import InvitePrompt from "../modules/InvitePrompt.js";
 import PeopleList from "../modules/PeopleList.js";
 import NotFound from "./NotFound";
+import ImageUpload from "../modules/ImageUpload.js";
 
-import { Link } from "@reach/router";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 
-import { get } from "../../utilities";
+import { get, post } from "../../utilities";
 import "./Journal.css";
 
 const Journal = (props) => {
   const [journalExists, setJournalExists] = useState(true);
   const [entries, setEntries] = useState([]);
   const [names, setNames] = useState([]);
+  const [imageModalOpen, setImageModalOpen] = useState(false);
 
   // Check if the journal actually exists
   useEffect(() => {
@@ -55,6 +55,18 @@ const Journal = (props) => {
     }
   };
 
+  const openImageModal = () => {
+    setImageModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setImageModalOpen(false);
+  };
+
+  const updateCoverPhoto = (newUrl) => {
+    post("/api/images/updatecoverphoto", { journalId: props.journalId, photoUrl: newUrl });
+  };
+
   let entriesList = null;
   const hasEntries = entries.length !== 0;
   if (hasEntries) {
@@ -78,6 +90,18 @@ const Journal = (props) => {
           <div className="flex items-center space-x-4">
             <PeopleList names={names} />
             <InvitePrompt journalId={props.journalId} addName={addName} />
+            <button
+              className="inline-flex items-center border-solid border-2 border-gray-500 rounded-full px-3 py-2 text-base duration-100 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              onClick={openImageModal}
+            >
+              <PhotoIcon className="w-5 h-5" />
+              <span className="text-lg ml-2">Change Cover Photo</span>
+            </button>
+            <ImageUpload
+              isOpen={imageModalOpen}
+              closeModal={closeImageModal}
+              handleImageUrl={updateCoverPhoto}
+            />
           </div>
 
           {props.userId && <NewEntry addNewEntry={addNewEntry} journalId={props.journalId} />}
