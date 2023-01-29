@@ -12,6 +12,7 @@ import Feed from "./pages/Feed";
 import Sidebar from "./modules/Sidebar";
 import Prompts from "./pages/Prompts";
 import LoggedOutNotFound from "./pages/LoggedOutNotFound";
+import Drafts from "./pages/Drafts";
 
 import "../utilities.css";
 import "./App.css";
@@ -80,6 +81,7 @@ const App = () => {
               <Profile path="/profile/:profileId" userId={userId} bio={userBio} />
               <Journal path="/journal/:journalId" userId={userId} />
               <MyJournals path="/myjournals" userId={userId} />
+              <Drafts path="/drafts" userId={userId} />
               <Feed path="/feed" />
               <NotFound default />
             </Router>
