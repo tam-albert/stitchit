@@ -4,6 +4,15 @@ import { formatRelative } from "date-fns";
 import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 const SingleDraft = (props) => {
+  const deleteDraft = () => {
+    fetch(`/api/draft/?draftId=${props.draftId}`, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    }).then(() => {
+      props.removeFromParent(props.draftId);
+    });
+  };
+
   return (
     <div className="p-4 border-2 border-neutral-500 rounded-md flex space-x-2 items-center">
       <span className="grow">
@@ -17,7 +26,7 @@ const SingleDraft = (props) => {
       <Link to="/" state={{ content: props.content, draftId: props.draftId }}>
         <PencilIcon className="w-5 h-5" />
       </Link>
-      <button>
+      <button onClick={deleteDraft}>
         <TrashIcon className="w-5 h-5" />
       </button>
     </div>

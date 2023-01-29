@@ -23,6 +23,13 @@ const Home = (props) => {
       const body = { content: text, journal_id: id };
       post("/api/entry", body).then(() => {
         console.log(`Published entry to journal with ID ${id}`);
+        if (props.location.state.draftId) {
+          // Remove draft from existence once it's published
+          fetch(`/api/draft/?draftId=${props.location.state.draftId}`, {
+            method: "DELETE",
+            headers: { "Content-type": "application/json" },
+          });
+        }
       });
     });
   };

@@ -5,9 +5,14 @@ import SingleDraft from "../modules/SingleDraft.js";
 
 const Drafts = (props) => {
   const [drafts, setDrafts] = useState([]);
+
   useEffect(() => {
     get("/api/draft").then((draftObjs) => setDrafts(draftObjs));
   }, []);
+
+  const removeDraft = (idToRemove) => {
+    setDrafts(drafts.filter((draft) => draft._id !== idToRemove));
+  };
 
   return (
     <div className="p-12">
@@ -19,6 +24,7 @@ const Drafts = (props) => {
             content={draft.content}
             creatorId={draft.creator_id}
             timeCreated={draft.time_created}
+            removeFromParent={removeDraft}
           />
         ))}
       </div>
