@@ -11,12 +11,13 @@ const Drafts = (props) => {
 
   return (
     <div className="p-12">
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col-reverse space-y-4 space-y-reverse">
         {drafts.map((draft) => (
           <SingleDraft
             key={`draft-${draft._id}`}
             content={draft.content}
             creatorId={draft.creator_id}
+            timeCreated={draft.time_created}
           />
         ))}
       </div>
