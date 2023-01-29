@@ -22,6 +22,13 @@ const Home = (props) => {
     });
   };
 
+  const saveAsDraft = () => {
+    const body = { content: text };
+    post("/api/draft", body).then(() => {
+      console.log("Saved as draft");
+    });
+  };
+
   return (
     <>
       <div className="px-16 py-12 h-full flex flex-col">
@@ -33,6 +40,13 @@ const Home = (props) => {
         ></textarea>
         <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
           <PostDialog publish={publish} />
+          <button
+            className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
+            hover:bg-gray-200"
+            onClick={saveAsDraft}
+          >
+            Save As Draft
+          </button>
         </div>
       </div>
     </>

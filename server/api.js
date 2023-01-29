@@ -157,7 +157,7 @@ router.post("/draft", auth.ensureLoggedIn, (req, res) => {
     content: req.body.content,
   });
 
-  newDraft.save.then((draft) => res.send(draft));
+  newDraft.save().then((draft) => res.send(draft));
 });
 
 router.post("/login", auth.login, (req, res) => {});
