@@ -82,7 +82,7 @@ const ImageUpload = (props) => {
                   <button
                     type="button"
                     className="inline-flex justify-center rounded-full border border-primary px-4 py-2 text-base font-medium text-primary duration-100
-                    disabled:text-neutral-500 disabled:border disabled:border-neutral-500 enabled:hover:bg-primary enabled:hover:text-white
+                    disabled:text-neutral-500 disabled:border disabled:border-neutral-500 disabled:opacity-50 enabled:hover:bg-primary enabled:hover:text-white
                     focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={handleSubmit}
                     disabled={!image}
