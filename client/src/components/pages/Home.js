@@ -27,11 +27,24 @@ const Home = (props) => {
     });
   };
 
-  const saveAsDraft = () => {
+  const saveAsNewDraft = () => {
     const body = { content: text };
     post("/api/draft", body).then(() => {
-      navigate(`/drafts`);
+      navigate("/drafts");
     });
+  };
+
+  const saveToDraft = () => {
+    const body = { draftId: props.location.state.draftId, content: text };
+    fetch("/api/draft", {
+      method: "put",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(body),
+    })
+      .then(() => {
+        navigate("/drafts");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -42,18 +55,27 @@ const Home = (props) => {
           placeholder="Speak your mind, add an image, or answer our daily prompt."
           maxLength="20000"
           onChange={handleChange}
-        >
-          {text}
-        </textarea>
+          defaultValue={text}
+        ></textarea>
         <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
           <PostDialog publish={publish} />
-          <button
-            className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
+          {props.location.state.draftId ? (
+            <button
+              className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
             hover:bg-gray-200"
-            onClick={saveAsDraft}
-          >
-            Save As Draft
-          </button>
+              onClick={saveToDraft}
+            >
+              Save
+            </button>
+          ) : (
+            <button
+              className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
+            hover:bg-gray-200"
+              onClick={saveAsNewDraft}
+            >
+              Save As Draft
+            </button>
+          )}
         </div>
       </div>
     </>

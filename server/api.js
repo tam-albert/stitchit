@@ -160,6 +160,23 @@ router.post("/draft", auth.ensureLoggedIn, (req, res) => {
   newDraft.save().then((draft) => res.send(draft));
 });
 
+router.put("/draft", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const draftObjectId = new mongoose.mongo.ObjectID(req.body.draftId);
+    Draft.findById(draftObjectId).then((draft) => {
+      if (draft.creator_id !== req.user._id) {
+        res.status(403).send({ msg: "this is not ur draft" });
+        return;
+      }
+      draft.content = req.body.content;
+      draft.save();
+      res.send(req.body.content);
+    });
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
 router.post("/login", auth.login, (req, res) => {});
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
