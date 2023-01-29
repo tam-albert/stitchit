@@ -52,7 +52,7 @@ const NewJournal = () => {
         </>
       ) : null}
       <button
-        className="flex items-center ml-3 rounded-full px-4 py-2 border border-secondary text-secondary duration-100 hover:bg-secondary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        className="flex items-center ml-3 rounded-full px-4 py-2 border-2 border-secondary text-secondary duration-100 hover:bg-secondary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         onClick={boxVisible ? handleSubmit : openPrompt}
       >
         <PlusIcon className="w-6 h-6" />
