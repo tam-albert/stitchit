@@ -15,6 +15,7 @@ const Entry = require("./models/entry");
 const Journal = require("./models/journal");
 const User = require("./models/user");
 const Prompt = require("./models/prompt");
+const Draft = require("./models/draft");
 
 const mongoose = require("mongoose");
 
@@ -142,6 +143,21 @@ router.post("/prompt", auth.ensureLoggedIn, (req, res) => {
   });
 
   newPrompt.save().then((prompt) => res.send(prompt));
+});
+
+router.get("/draft", auth.ensureLoggedIn, (req, res) => {
+  Draft.find({ creator_id: req.user._id }).then((drafts) => {
+    res.send(drafts);
+  });
+});
+
+router.post("/draft", auth.ensureLoggedIn, (req, res) => {
+  const newDraft = new Draft({
+    creator_id: req.user._id,
+    content: req.body.content,
+  });
+
+  newDraft.save.then((draft) => res.send(draft));
 });
 
 router.post("/login", auth.login, (req, res) => {});
