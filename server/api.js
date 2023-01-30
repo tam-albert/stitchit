@@ -145,6 +145,15 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
         // Update entries_list in the journal we found
         journal.entries_list.push(entry._id);
         journal.save();
+
+        // Need to create new activity
+        createNewActivity(
+          req.user._id,
+          req.user.name,
+          `just posted to ${journal.name}`,
+          `/journal/${journal._id}`,
+          journal.collaborator_ids
+        );
         res.send(entry);
       });
     });

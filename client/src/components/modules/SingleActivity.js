@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 import { formatRelative } from "date-fns";
 
 const SingleActivity = (props) => {
