@@ -82,7 +82,7 @@ const App = () => {
               <Journal path="/journal/:journalId" userId={userId} />
               <MyJournals path="/myjournals" userId={userId} />
               <Drafts path="/drafts" userId={userId} />
-              <Feed path="/feed" />
+              <Feed path="/feed" userId={userId} />
               <NotFound default />
             </Router>
           </div>

@@ -16,6 +16,7 @@ const Journal = require("./models/journal");
 const User = require("./models/user");
 const Prompt = require("./models/prompt");
 const Draft = require("./models/draft");
+const Activity = require("./models/activity");
 
 const mongoose = require("mongoose");
 
@@ -29,13 +30,39 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 
 // initialize AWS S3 instance
-const { S3Client, GetObjectCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const AWS_REGION = "us-east-1";
 const PROFILE_BUCKET_NAME = "stitch-it-profile-upload";
 const client = new S3Client({ region: AWS_REGION });
 
 const { v4: uuidv4 } = require("uuid");
+
+const createNewActivity = (creatorId, creatorName, content, link, visibleTo) => {
+  const newActivity = new Activity({
+    creator_id: creatorId,
+    creator_name: creatorName,
+    content: content,
+    link: link,
+    visible_to: visibleTo,
+  });
+
+  newActivity.save();
+};
+
+const makeActivitiesVisibleTo = async (query, newUser) => {
+  console.log(query, newUser);
+  const result = await Activity.updateMany(query, {
+    $addToSet: { visible_to: newUser },
+  });
+  console.log(result);
+};
+
+const makeActivitiesInvisibleTo = (query, hideFromUser) => {
+  Activity.updateMany(query, {
+    $pullAll: { visible_to: [hideFromUser] },
+  });
+};
 
 router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
@@ -94,7 +121,9 @@ router.post("/comment", auth.ensureLoggedIn, (req, res) => {
     timestamp: req.body.timestamp,
   });
 
-  newComment.save().then((comment) => res.send(comment));
+  newComment.save().then((comment) => {
+    res.send(comment);
+  });
 });
 
 router.get("/entry", (req, res) => {
@@ -120,6 +149,15 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
         // Update entries_list in the journal we found
         journal.entries_list.push(entry._id);
         journal.save();
+
+        // Need to create new activity
+        createNewActivity(
+          req.user._id,
+          req.user.name,
+          `just posted to ${journal.name}`,
+          `/journal/${journal._id}`,
+          journal.collaborator_ids
+        );
         res.send(entry);
       });
     });
@@ -190,6 +228,18 @@ router.delete("/draft", auth.ensureLoggedIn, (req, res) => {
   }
 });
 
+router.get("/feed", auth.ensureLoggedIn, (req, res) => {
+  Activity.find({ visible_to: req.user._id }).then((activities) => {
+    res.send(activities);
+  });
+});
+
+router.get("/profileFeed", auth.ensureLoggedIn, (req, res) => {
+  Activity.find({ creator_id: req.query.userId, visible_to: req.user._id }).then((activities) => {
+    res.send(activities);
+  });
+});
+
 router.post("/login", auth.login, (req, res) => {});
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -231,8 +281,13 @@ router.post("/invite", auth.ensureLoggedIn, (req, res) => {
             }
 
             journal.save();
-            res.send({ userName: user.name });
-            return;
+
+            // Make activities from that journal visible to the user
+            makeActivitiesVisibleTo({ link: `/journal/${journal._id}` }, req.body.inviteId).then(
+              () => {
+                res.send({ userName: user.name });
+              }
+            );
           } else {
             res.status(403).send();
             return;
