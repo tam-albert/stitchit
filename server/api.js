@@ -50,10 +50,12 @@ const createNewActivity = (creatorId, creatorName, content, link, visibleTo) => 
   newActivity.save();
 };
 
-const makeActivitiesVisibleTo = (query, newUser) => {
-  Activity.updateMany(query, {
+const makeActivitiesVisibleTo = async (query, newUser) => {
+  console.log(query, newUser);
+  const result = await Activity.updateMany(query, {
     $addToSet: { visible_to: newUser },
   });
+  console.log(result);
 };
 
 const makeActivitiesInvisibleTo = (query, hideFromUser) => {
@@ -119,7 +121,9 @@ router.post("/comment", auth.ensureLoggedIn, (req, res) => {
     timestamp: req.body.timestamp,
   });
 
-  newComment.save().then((comment) => res.send(comment));
+  newComment.save().then((comment) => {
+    res.send(comment);
+  });
 });
 
 router.get("/entry", (req, res) => {
@@ -230,6 +234,12 @@ router.get("/feed", auth.ensureLoggedIn, (req, res) => {
   });
 });
 
+router.get("/profileFeed", auth.ensureLoggedIn, (req, res) => {
+  Activity.find({ creator_id: req.query.userId, visible_to: req.user._id }).then((activities) => {
+    res.send(activities);
+  });
+});
+
 router.post("/login", auth.login, (req, res) => {});
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -271,8 +281,13 @@ router.post("/invite", auth.ensureLoggedIn, (req, res) => {
             }
 
             journal.save();
-            res.send({ userName: user.name });
-            return;
+
+            // Make activities from that journal visible to the user
+            makeActivitiesVisibleTo({ link: `/journal/${journal._id}` }, req.body.inviteId).then(
+              () => {
+                res.send({ userName: user.name });
+              }
+            );
           } else {
             res.status(403).send();
             return;

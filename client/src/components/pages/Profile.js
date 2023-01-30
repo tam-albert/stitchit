@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProfileNameCard from "../modules/ProfileNameCard.js";
+import SingleActivity from "../modules/SingleActivity.js";
 
 import { get } from "../../utilities.js";
 
@@ -9,12 +10,17 @@ import "./Profile.css";
 const Profile = (props) => {
   const [name, setName] = useState("");
   const [pfpUrl, setPfpUrl] = useState("");
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     document.title = "Profile Page";
     get("/api/user", { userid: props.profileId }).then((user) => {
       setName(user.name);
       setPfpUrl(user.pfp);
+    });
+
+    get("/api/profileFeed", { userId: props.profileId }).then((activityObjs) => {
+      setActivities(activityObjs);
     });
   }, [props.profileId]);
 
@@ -26,16 +32,22 @@ const Profile = (props) => {
         profileId={props.profileId}
         userId={props.userId}
       />
-      <div className="Profile-avatarContainer">
-        <div className="Profile-avatar" />
-      </div>
-      <h1 className="Profile-name u-textCenter">{name}</h1>
-      <hr className="Profile-line" />
-      <div className="u-flex">
-        <div className="Profile-subContainer u-textCenter">
-          <h4 className="Profile-subTitle">About Me</h4>
-          <div id="profile-description">insert bio</div>
-        </div>
+      <div className="flex flex-col-reverse space-y-4 space-y-reverse p-12">
+        {activities.length ? (
+          activities.map((activity) => (
+            <SingleActivity
+              key={`activity-${activity._id}`}
+              selfId={props.userId}
+              activityId={activity.creator_id}
+              name={activity.creator_name}
+              content={activity.content}
+              timestamp={activity.timestamp}
+              link={activity.link}
+            />
+          ))
+        ) : (
+          <span className="italic text-lg text-center">Nothing to see here!</span>
+        )}
       </div>
     </>
   );
