@@ -16,6 +16,7 @@ const Journal = require("./models/journal");
 const User = require("./models/user");
 const Prompt = require("./models/prompt");
 const Draft = require("./models/draft");
+const Activity = require("./models/activity");
 
 const mongoose = require("mongoose");
 
@@ -29,13 +30,37 @@ const router = express.Router();
 const socketManager = require("./server-socket");
 
 // initialize AWS S3 instance
-const { S3Client, GetObjectCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const AWS_REGION = "us-east-1";
 const PROFILE_BUCKET_NAME = "stitch-it-profile-upload";
 const client = new S3Client({ region: AWS_REGION });
 
 const { v4: uuidv4 } = require("uuid");
+
+const createNewActivity = (creatorId, creatorName, content, link, visibleTo) => {
+  const newActivity = new Activity({
+    creator_id: creatorId,
+    creator_name: creatorName,
+    content: content,
+    link: link,
+    visible_to: visibleTo,
+  });
+
+  newActivity.save();
+};
+
+const makeActivitiesVisibleTo = (query, newUser) => {
+  Activity.updateMany(query, {
+    $addToSet: { visible_to: newUser },
+  });
+};
+
+const makeActivitiesInvisibleTo = (query, hideFromUser) => {
+  Activity.updateMany(query, {
+    $pullAll: { visible_to: [hideFromUser] },
+  });
+};
 
 router.get("/journals", auth.ensureLoggedIn, (req, res) => {
   // gets all journals with given ID (or all of them if none provided)
