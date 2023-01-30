@@ -215,6 +215,12 @@ router.delete("/draft", auth.ensureLoggedIn, (req, res) => {
   }
 });
 
+router.get("/feed", auth.ensureLoggedIn, (req, res) => {
+  Activity.find({ visible_to: req.user._id }).then((activities) => {
+    res.send(activities);
+  });
+});
+
 router.post("/login", auth.login, (req, res) => {});
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
