@@ -15,12 +15,14 @@ const Journal = (props) => {
   const [journalExists, setJournalExists] = useState(true);
   const [entries, setEntries] = useState([]);
   const [names, setNames] = useState([]);
+  const [ids, setIds] = useState([]);
   const [imageModalOpen, setImageModalOpen] = useState(false);
 
   // Check if the journal actually exists
   useEffect(() => {
     get("/api/journals", { journalId: props.journalId })
       .then((journal) => {
+        setIds(journal.collaborator_ids);
         setNames(journal.collaborator_names);
       })
       .catch(() => {
@@ -85,7 +87,7 @@ const Journal = (props) => {
       {journalExists ? (
         <div className="flex flex-col items-center">
           <div className="flex items-center space-x-4">
-            <PeopleList names={names} />
+            <PeopleList names={names} ids={ids} />
             <InvitePrompt journalId={props.journalId} addName={addName} />
             <button
               className="inline-flex items-center border-solid border-2 border-gray-500 rounded-full px-3 py-2 text-base duration-100 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
