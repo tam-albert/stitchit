@@ -10,7 +10,7 @@ const SingleActivity = (props) => {
           <span className="font-bold">
             {props.selfId === props.activityId ? "You" : props.name}
           </span>{" "}
-          {props.content}
+          <span className="text-gray-700">{props.content}</span>
         </div>
         <p className="text-gray-500">{formatRelative(new Date(props.timestamp), new Date())}</p>
       </div>
