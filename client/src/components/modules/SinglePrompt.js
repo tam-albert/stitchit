@@ -12,10 +12,10 @@ const SinglePrompt = (props) => {
           "{props.content.length > 75 ? `${props.content.slice(0, 75)}...` : props.content}"
         </span>{" "}
         <span className="text-gray-500">
-          created {formatRelative(new Date(props.date), new Date())}
-        </span>{" "}
+           {formatRelative(new Date(props.date), new Date())}
+        </span>{" | "}
         <span className="text-gray-500">
-          likes {formatRelative(new Date(props.likes), new Date())}
+          likes: {props.likes}
         </span>
       </span>
       <Link to="/">
