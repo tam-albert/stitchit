@@ -28,7 +28,7 @@ const Journal = (props) => {
       .catch(() => {
         setJournalExists(false);
       });
-  });
+  }, []);
 
   // called when the "Journal" component "mounts", i.e.
   // when it shows up on screen

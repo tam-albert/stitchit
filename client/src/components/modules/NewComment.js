@@ -27,17 +27,18 @@ const NewInput = (props) => {
   };
 
   return (
-    <div className="u-flex">
+    <div className="flex flex-col">
       <textarea
         type="text"
         placeholder={props.defaultText}
         value={value}
         onChange={handleChange}
-        className="NewInput-comment"
+        className="border border-darkgrey p-1 rounded-sm resize-none"
       />
       <button
         type="submit"
-        className="NewInput-button u-pointer"
+        className="border border-secondary text-secondary py-1 my-2 rounded-sm duration-100
+          hover:bg-secondary hover:text-white"
         value="Submit"
         onClick={handleSubmit}
       >

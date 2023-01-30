@@ -18,7 +18,7 @@ import { NewComment } from "./NewComment.js";
  */
 const CommentsBlock = (props) => {
   return (
-    <div className="JournalPost-commentSection">
+    <div className="py-2 w-1/4">
       <div className="entry-comments">
         {props.comments.map((comment) => (
           <SingleComment

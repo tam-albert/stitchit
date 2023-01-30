@@ -30,13 +30,12 @@ const JournalPost = (props) => {
   };
 
   return (
-    <div className="JournalPost-container">
+    <div className="flex space-x-2 w-full border-b border-secondary rounded-sm p-2 m-2">
       <SingleEntry
         _id={props._id}
         creator_name={props.creator_name}
         creator_id={props.creator_id}
         content={props.content}
-        className="m-4"
       />
       <CommentsBlock
         entry={props}

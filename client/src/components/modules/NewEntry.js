@@ -27,17 +27,18 @@ const NewInput = (props) => {
   };
 
   return (
-    <div className="u-flex m-4">
+    <div className="flex flex-col w-full m-4">
       <textarea
         type="text"
         placeholder={props.defaultText}
         value={value}
         onChange={handleChange}
-        className="NewInput-entry rounded-md"
+        className="w-full p-4 border border-darkgrey min-h-[25rem] text-lg resize-none break-words rounded-md"
       />
       <button
         type="submit"
-        className="NewInput-button u-pointer"
+        className="border border-secondary text-secondary py-1 my-2 rounded-sm duration-100
+          hover:bg-secondary hover:text-white"
         value="Submit"
         onClick={handleSubmit}
       >
@@ -62,13 +63,7 @@ const NewEntry = (props) => {
     });
   };
 
-  return (
-      <div>
-        <NewInput defaultText="Speak your mind... " onSubmit={addEntry} />
-      </div>
-  );
-
-  
+  return <NewInput defaultText="Speak your mind... " onSubmit={addEntry} />;
 };
 
 export { NewEntry, NewInput };

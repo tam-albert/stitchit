@@ -12,11 +12,13 @@ import { Link } from "@reach/router";
  */
 const SingleEntry = (props) => {
   return (
-    <div className="JournalPost-story">
-      <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
-        {props.creator_name}
-      </Link>
-      <p className="Journal-storyContent">{props.content}</p>
+    <div className="w-3/4">
+      <p>
+        <Link to={`/profile/${props.creator_id}`} className="u-link u-bold inline text-lg">
+          {props.creator_name}
+        </Link>{" "}
+        <span className="text-lg">{props.content}</span>
+      </p>
     </div>
   );
 };
