@@ -130,7 +130,7 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.get("/prompt", (req, res) => {
-  Prompt.find({ date: req.query.date }).then((prompts) => {
+  Prompt.find({}).then((prompts) => {
     res.send(prompts);
   });
 });
