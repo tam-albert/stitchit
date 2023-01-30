@@ -7,7 +7,10 @@ const SingleActivity = (props) => {
     <div className="p-4 border-2 border-neutral-500 rounded-md flex space-x-2 items-center">
       {props.link ? (
         <Link to={props.link}>
-          <span className="font-bold">{props.name}</span> {props.content}
+          <span className="font-bold">
+            {props.selfId === props.activityId ? "You" : props.name}
+          </span>{" "}
+          {props.content}
         </Link>
       ) : (
         <p className="grow">

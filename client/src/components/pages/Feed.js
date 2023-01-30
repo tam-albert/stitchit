@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { get } from "../../utilities";
 import SingleActivity from "../modules/SingleActivity";
 
-const Feed = () => {
+const Feed = (props) => {
   const [activities, setActivities] = useState([]);
   useEffect(() => {
     get("/api/feed").then((activityObjs) => {
@@ -17,6 +17,8 @@ const Feed = () => {
           activities.map((activity) => (
             <SingleActivity
               key={`activity-${activity._id}`}
+              selfId={props.userId}
+              activityId={activity.creator_id}
               name={activity.creator_name}
               content={activity.content}
               timestamp={activity.timestamp}
