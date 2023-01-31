@@ -33,11 +33,11 @@ const NewInput = (props) => {
         placeholder={props.defaultText}
         value={value}
         onChange={handleChange}
-        className="border border-darkgrey p-1 rounded-sm resize-none"
+        className="border border-darkgrey p-1 rounded-md resize-none"
       />
       <button
         type="submit"
-        className="border border-secondary text-secondary py-1 my-2 rounded-sm duration-100
+        className="border border-secondary text-secondary py-1 my-2 rounded-md duration-100
           hover:bg-secondary hover:text-white"
         value="Submit"
         onClick={handleSubmit}
