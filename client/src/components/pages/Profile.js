@@ -11,6 +11,7 @@ const Profile = (props) => {
   const [name, setName] = useState("");
   const [pfpUrl, setPfpUrl] = useState("");
   const [activities, setActivities] = useState([]);
+  const [singleActivities, setSingleActivities] = useState([]);
 
   useEffect(() => {
     document.title = "Profile Page";
@@ -24,6 +25,24 @@ const Profile = (props) => {
     });
   }, [props.profileId]);
 
+  useEffect(() => {
+    setSingleActivities(
+      activities.map((activity) => (
+        <SingleActivity
+          key={`activity-${activity._id}`}
+          selfId={props.userId}
+          activityId={activity.creator_id}
+          name={activity.creator_name}
+          content={activity.content}
+          timestamp={activity.timestamp}
+          link={activity.link}
+        />
+      ))
+    );
+  }, [activities]);
+
+  useEffect;
+
   return (
     <>
       <ProfileNameCard
@@ -32,19 +51,18 @@ const Profile = (props) => {
         profileId={props.profileId}
         userId={props.userId}
       />
-      <div className="flex flex-col-reverse space-y-4 space-y-reverse p-12">
-        {activities.length ? (
-          activities.map((activity) => (
-            <SingleActivity
-              key={`activity-${activity._id}`}
-              selfId={props.userId}
-              activityId={activity.creator_id}
-              name={activity.creator_name}
-              content={activity.content}
-              timestamp={activity.timestamp}
-              link={activity.link}
-            />
-          ))
+      <div className="flex flex-col space-y-4 p-12">
+        {singleActivities.length ? (
+          singleActivities.length > 9 ? (
+            <>
+              {singleActivities.slice(0, 9)}
+              <div className="w-full text-center text-gray-700 italic">{`+${
+                singleActivities.length - 9
+              } more...`}</div>
+            </>
+          ) : (
+            singleActivities
+          )
         ) : (
           <span className="italic text-lg text-center">Nothing to see here!</span>
         )}
