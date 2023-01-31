@@ -38,9 +38,11 @@ const NewInput = (props) => {
       <button
         type="submit"
         className="border border-secondary text-secondary py-1 my-2 rounded-sm duration-100
-          hover:bg-secondary hover:text-white"
+          enabled:hover:bg-secondary enabled:hover:text-white
+          disabled:text-neutral-500 disabled:border disabled:border-neutral-500 disabled:opacity-50"
         value="Submit"
         onClick={handleSubmit}
+        disabled={!value}
       >
         Submit
       </button>

@@ -31,6 +31,7 @@ const App = () => {
   const [userBio, setUserBio] = useState(null);
 
   useEffect(() => {
+    document.title = "StitchIt";
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
@@ -40,10 +41,6 @@ const App = () => {
         setUserBio(user.bio);
       }
     });
-  }, []);
-
-  useEffect(() => {
-    document.title = "StitchIt";
   }, []);
 
   const handleLogin = (credentialResponse) => {
