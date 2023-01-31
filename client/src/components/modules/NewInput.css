@@ -6,6 +6,7 @@
 }
 
 .NewInput-comment {
+  font-family: "Mukta";
   border: var(--darkgrey) 1px solid;
   border-radius: var(--xs) 0 0 var(--xs);
   transition: box-shadow 0.1s;
@@ -17,11 +18,13 @@
   font-size: 20px;
   padding: var(--s) var(--m);
   overflow-wrap: break-word;
+  border-color: var(--secondary--dim);
+  box-shadow: 0 0 0 var(--xs) var(--secondary--dim);
 }
 
 .NewInput-input:focus-within {
   border-color: var(--secondary--dim);
-  box-shadow: 0 0 0 var(--xs) rgba(130, 172, 216, 0.25);
+  box-shadow: 0 0 0 var(--xs) var(--secondary--dim);
 }
 
 .NewInput-button {

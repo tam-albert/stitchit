@@ -18,11 +18,12 @@ const SingleEntry = (props) => {
           Responding to prompt: "{props.prompt_content}"
         </div>
       ) : null}
-      <p>
+      <p> 
+        
+        <span className="text-lg">{props.content}</span>{" | "}
         <Link to={`/profile/${props.creator_id}`} className="u-link u-bold inline text-lg">
           {props.creator_name}
-        </Link>{" "}
-        <span className="text-lg">{props.content}</span>
+        </Link>
       </p>
     </div>
   );
