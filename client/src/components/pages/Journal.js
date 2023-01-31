@@ -77,6 +77,7 @@ const Journal = (props) => {
         creator_id={entryObj.creator_id}
         userId={props.userId}
         content={entryObj.content}
+        prompt_content={entryObj.prompt_content}
       />
     ));
   } else {

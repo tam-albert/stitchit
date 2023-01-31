@@ -5,6 +5,7 @@ const EntrySchema = new mongoose.Schema({
   creator_id: String,
   creator_name: String,
   prompt_id: String,
+  prompt_content: String,
   content: String,
   journal_id: String,
 });

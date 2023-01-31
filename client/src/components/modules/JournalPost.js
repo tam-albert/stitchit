@@ -36,6 +36,7 @@ const JournalPost = (props) => {
         creator_name={props.creator_name}
         creator_id={props.creator_id}
         content={props.content}
+        prompt_content={props.prompt_content}
       />
       <CommentsBlock
         entry={props}

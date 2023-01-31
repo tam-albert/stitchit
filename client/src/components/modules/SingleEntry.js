@@ -12,7 +12,12 @@ import { Link } from "@reach/router";
  */
 const SingleEntry = (props) => {
   return (
-    <div className="w-3/4">
+    <div className="w-3/4 flex flex-col">
+      {props.prompt_content ? (
+        <div className="w-full bg-gray-100 bg-opacity-50 rounded-md my-2 p-4">
+          Responding to prompt: "{props.prompt_content}"
+        </div>
+      ) : null}
       <p>
         <Link to={`/profile/${props.creator_id}`} className="u-link u-bold inline text-lg">
           {props.creator_name}

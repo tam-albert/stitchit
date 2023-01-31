@@ -140,9 +140,10 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
       const newEntry = new Entry({
         creator_id: req.user._id,
         creator_name: req.user.name,
-        prompt: req.body.prompt,
         content: req.body.content,
         journal_id: req.body.journal,
+        prompt_id: req.body.prompt_id,
+        prompt_content: req.body.prompt_content,
       });
 
       newEntry.save().then((entry) => {
@@ -168,7 +169,7 @@ router.post("/entry", auth.ensureLoggedIn, (req, res) => {
 });
 
 router.get("/prompt", (req, res) => {
-  Prompt.find({date: {$lt: new Date()}}).then((prompts) => {
+  Prompt.find({ date: { $lt: new Date() } }).then((prompts) => {
     res.send(prompts);
   });
 });
