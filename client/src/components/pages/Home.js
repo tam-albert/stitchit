@@ -82,7 +82,7 @@ const Home = (props) => {
         ) : null}
         <textarea
           className="w-full grow p-4 resize-none rounded-md text-lg placeholder:italic placeholder:text-2xl"
-          placeholder="Speak your mind, add an image, or answer our daily prompt."
+          placeholder="Speak your mind, or check out our Prompts tab for inspiration."
           maxLength="20000"
           onChange={handleChange}
           defaultValue={text}
