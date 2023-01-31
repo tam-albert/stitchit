@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 const PromptSchema = new mongoose.Schema({
   content: String,
   likes: String,
-  date: String
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // compile model from schema
