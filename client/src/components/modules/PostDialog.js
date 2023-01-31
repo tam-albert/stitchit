@@ -38,7 +38,12 @@ const PostDialog = (props) => {
 
   return (
     <Popover className="relative">
-      <Popover.Button className="inline-flex items-center border-solid border-2 border-slate-800 rounded-full px-3 py-2 text-base hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+      <Popover.Button
+        className="inline-flex items-center border-solid border-2 border-slate-800 rounded-full px-3 py-2 text-base duration-100
+        enabled:hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
+        disabled:text-neutral-500 disabled:border-2 disabled:border-neutral-500 disabled:opacity-75"
+        disabled={props.disabled}
+      >
         <span>Post</span>
         <ChevronUpIcon className="-mr-1 ml-1 h-5 w-5" />
       </Popover.Button>

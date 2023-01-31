@@ -88,24 +88,15 @@ const Home = (props) => {
           defaultValue={text}
         ></textarea>
         <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
-          <PostDialog publish={publish} />
-          {props.location?.state?.draftId ? (
-            <button
-              className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
-            hover:bg-gray-200"
-              onClick={saveToDraft}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className="border-2 border-slate-500 px-3 py-2 rounded-full mr-4 text-slate-700 duration-100
-            hover:bg-gray-200"
-              onClick={saveAsNewDraft}
-            >
-              Save As Draft
-            </button>
-          )}
+          <PostDialog publish={publish} disabled={!text} />
+          <button
+            className="border-2 border-slate-800 px-3 py-2 rounded-full mr-4 duration-100
+              enabled:hover:bg-gray-200 disabled:text-neutral-500 disabled:border-2 disabled:border-neutral-500 disabled:opacity-75"
+            onClick={props.location?.state?.draftId ? saveToDraft : saveAsNewDraft}
+            disabled={!text}
+          >
+            {props.location?.state?.draftId ? "Save" : "Save As Draft"}
+          </button>
         </div>
       </div>
     </>
