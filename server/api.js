@@ -184,6 +184,19 @@ router.post("/prompt", auth.ensureLoggedIn, (req, res) => {
   newPrompt.save().then((prompt) => res.send(prompt));
 });
 
+router.post("/promptLike", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const promptObjectID = new mongoose.mongo.ObjectID(req.body.promptId);
+    Prompt.findOneAndUpdate({_id: promptObjectID}, { $inc: {likes: 1} })
+      .then((prompt) => {
+        res.send(prompt);
+      })
+      .catch((err) => res.send({ msg: err }));
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
 router.get("/draft", auth.ensureLoggedIn, (req, res) => {
   Draft.find({ creator_id: req.user._id }).then((drafts) => {
     res.send(drafts);

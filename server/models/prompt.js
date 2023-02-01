@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 //define a entry schema for the database
 const PromptSchema = new mongoose.Schema({
   content: String,
-  likes: String,
+  likes: Number,
   date: {
     type: Date,
     default: Date.now,
