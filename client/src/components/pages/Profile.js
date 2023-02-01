@@ -12,6 +12,7 @@ const Profile = (props) => {
   const [pfpUrl, setPfpUrl] = useState("");
   const [activities, setActivities] = useState([]);
   const [singleActivities, setSingleActivities] = useState([]);
+  const [allEntriesShown, setAllEntriesShown] = useState(false);
 
   useEffect(() => {
     document.title = "Profile Page";
@@ -21,7 +22,7 @@ const Profile = (props) => {
     });
 
     get("/api/profileFeed", { userId: props.profileId }).then((activityObjs) => {
-      setActivities(activityObjs);
+      setActivities(activityObjs.reverse());
     });
   }, [props.profileId]);
 
@@ -51,20 +52,21 @@ const Profile = (props) => {
         profileId={props.profileId}
         userId={props.userId}
       />
-      <div className="flex flex-col mt-4 space-y-4 p-12">
+      <div className="flex flex-col mt-4 p-12 space-y-4">
         {singleActivities.length ? (
-          singleActivities.length > 9 ? (
+          (singleActivities.length > 8) & !allEntriesShown ? (
             <>
-              {singleActivities.slice(0, 9)}
-              <div className="w-full text-center text-gray-700 italic">{`+${
-                singleActivities.length - 9
-              } more...`}</div>
+              {singleActivities.slice(0, 8)}
+              <button
+                className="w-full text-gray-700 italic underline"
+                onClick={() => setAllEntriesShown(true)}
+              >{`+${singleActivities.length - 8} more...`}</button>
             </>
           ) : (
             singleActivities
           )
         ) : (
-          <span className="italic text-lg text-center">Nothing to see here!</span>
+          <span className="italic text-lg text-center">Nothing in your feed yet!</span>
         )}
       </div>
     </>

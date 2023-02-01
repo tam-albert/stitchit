@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./NewInput.css";
 import { post } from "../../utilities";
 
-import { PlusIcon } from "@heroicons/react/20/solid";
+import { ChatBubbleBottomCenterIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 /**
  * New Comment is a New Post component for comments
@@ -36,17 +36,25 @@ const NewComment = (props) => {
     });
   };
 
+  // const whenHidden = (
+  //   <div className="flex flex-col">
+  //     <button
+  //       className="border border-secondary text-secondary py-1 my-2 rounded-sm duration-100
+  //       hover:bg-secondary hover:text-white"
+  //       onClick={() => setInputVisible(true)}
+  //     >
+  //       <div className="flex items-center justify-center">
+  //         <PlusIcon className="w-6 h-6" />
+  //         <span className="ml-3">New Comment</span>
+  //       </div>
+  //     </button>
+  //   </div>
+  // );
+
   const whenHidden = (
-    <div className="flex flex-col">
-      <button
-        className="border border-secondary text-secondary py-1 my-2 rounded-sm duration-100
-        hover:bg-secondary hover:text-white"
-        onClick={() => setInputVisible(true)}
-      >
-        <div className="flex items-center justify-center">
-          <PlusIcon className="w-6 h-6" />
-          <span className="ml-3">New Comment</span>
-        </div>
+    <div className="flex flex-row-reverse px-4">
+      <button onClick={() => setInputVisible(true)}>
+        <ChatBubbleBottomCenterIcon className="w-8 h-8" />
       </button>
     </div>
   );

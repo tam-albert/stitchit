@@ -30,7 +30,7 @@ const JournalPost = (props) => {
   };
 
   return (
-    <div className="flex space-x-2 w-full border-b border-secondary rounded-sm p-2 m-2 py-8">
+    <div className="flex space-x-5 w-full border-b border-secondary rounded-sm p-2 m-2 py-8">
       <SingleEntry
         _id={props._id}
         creator_name={props.creator_name}
@@ -44,6 +44,7 @@ const JournalPost = (props) => {
         creator_id={props.creator_id}
         userId={props.userId}
         addNewComment={addNewComment}
+        className="flex-initial"
       />
     </div>
   );

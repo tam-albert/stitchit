@@ -229,6 +229,23 @@ router.delete("/draft", auth.ensureLoggedIn, (req, res) => {
   }
 });
 
+router.delete("/journal", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const journalObjectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findOneAndDelete({ _id: journalObjectId, creator_id: req.user._id })
+      .then((journal) => {
+        res.send(journal);
+      })
+      .catch((err) => res.send({ msg: err }));
+
+    Activity.deleteMany({
+      link: `/journal/${req.query.journalId}`,
+    }).catch((err) => res.send({ msg: err }));
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
 router.get("/feed", auth.ensureLoggedIn, (req, res) => {
   Activity.find({ visible_to: req.user._id }).then((activities) => {
     res.send(activities);
