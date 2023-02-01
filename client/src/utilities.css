@@ -16,6 +16,7 @@
 
 /* TODO: REPLACE WITH YOUR OWN FONT! */
 @import url("https://fonts.googleapis.com/css?family=Mukta");
+@import url("https://fonts.googleapis.com/css?family=Homemade+Apple");
 
 @tailwind base;
 @tailwind components;
@@ -47,6 +48,10 @@ body {
   padding: 0;
   font-family: "Mukta";
   font-weight: 300;
+}
+
+subtitle{
+  font-family: "Homemade+Apple";
 }
 
 form {

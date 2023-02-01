@@ -18,7 +18,7 @@ const LoggedOutHome = (props) => {
   return (
     <>
       <img src={title} alt="Title" className="title" onMouseOver={e => (e.currentTarget.src=hover_title)} onMouseOut={e => (e.currentTarget.src=title)}/>
-      <h1 className="tag">a collaborative journal.</h1>
+      <h1 className="tag">&nbsp; a collaborative journal.  &nbsp;</h1>
       <div className="join">
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           {props.userId ? (
