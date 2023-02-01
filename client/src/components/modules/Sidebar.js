@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "@reach/router";
 import LogoutMenu from "./LogoutMenu";
+import title from "../pages/stitchit_title.png";
+import hover_title from "../pages/stitchit_title_hover.png";
 import {
   PlusIcon,
   BookOpenIcon,
@@ -24,6 +26,7 @@ const Sidebar = (props) => {
     >
       <div className="px-3 py-4 flex flex-col rounded bg-gray-100 min-h-screen sticky top-0">
         <ul className="space-y-2 flex-grow overflow-x-hidden">
+          <img src={title} alt="Title" className="flex title"/>
           <li className="Sidebar-container">
             <Link
               to="/"

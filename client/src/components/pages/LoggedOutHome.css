@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Homemade+Apple");
+
 .Home-name {
   font-size: 40px;
   font-weight: 300;
@@ -13,15 +15,12 @@ body {
   margin-top: 10%;
 }
 
-.title:hover {
-  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));
-}
-
 .tag {
   border-radius: 25px;
   background: #a7d8bc;
   width: fit-content;
   height: fit-content;
+  font-family: "Homemade Apple";
 
   font-style: italic;
   font-size: 30px;
