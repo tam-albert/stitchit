@@ -21,7 +21,6 @@ const Journal = (props) => {
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [journalName, setJournalName] = useState("");
-  const [journalId, setJournalId] = useState(null);
 
   const navigator = useNavigate();
 
@@ -32,7 +31,6 @@ const Journal = (props) => {
         setIds(journal.collaborator_ids);
         setNames(journal.collaborator_names);
         setJournalName(journal.name);
-        setJournalId(journal._id);
       })
       .catch(() => {
         setJournalExists(false);
@@ -111,6 +109,7 @@ const Journal = (props) => {
     <div className="p-12">
       {journalExists ? (
         <div className="flex flex-col items-center">
+          <div className="text-3xl text-center w-full mb-4">{journalName}</div>
           <div className="flex items-center space-x-4">
             <PeopleList names={names} ids={ids} />
             <InvitePrompt journalId={props.journalId} addName={addName} />
