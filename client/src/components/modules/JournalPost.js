@@ -30,7 +30,7 @@ const JournalPost = (props) => {
   };
 
   return (
-    <div className="flex space-x-2 w-full border-b border-secondary rounded-sm p-2 m-2">
+    <div className="flex space-x-2 w-full border-b border-secondary rounded-sm p-2 m-2 py-8">
       <SingleEntry
         _id={props._id}
         creator_name={props.creator_name}
