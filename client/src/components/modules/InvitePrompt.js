@@ -56,7 +56,7 @@ const InvitePrompt = (props) => {
             >
               Invite
             </button>
-            <HelpTooltip content="You can get a user's profile ID by going to their profile page and copying the 12-digit identifier after https://stitch-it.herokuapp.com/profile/." />
+            <HelpTooltip content="You can get a user's profile ID by going to their profile page and copying the 24-character identifier after https://stitch-it.herokuapp.com/profile/." />
           </div>
           <p className={statusSuccessful ? "text-lime-500" : "text-red-500"}>{statusText}</p>
         </>

@@ -130,7 +130,6 @@ const Journal = (props) => {
               onClick={openDeleteModal}
             >
               <TrashIcon className="w-5 h-5 text-red-500" />
-              <span className="text-lg text-red-500 ml-2">Delete Journal</span>
             </button>
             <DeleteJournal
               isOpen={deleteModalOpen}

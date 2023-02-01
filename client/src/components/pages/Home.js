@@ -80,13 +80,15 @@ const Home = (props) => {
     <>
       <div className="px-16 p-12 h-full flex flex-col">
         {hasJournals ? null : (
-          <div className="flex flex-row-reverse p-3 rounded-md space-x-4 bg-neutral-50 space-x-reverse items-center -translate-y-4 -mb-3">
-            <div className="pr-2">
+          <div className="flex flex-row-reverse p-3 rounded-md space-x-4 bg-neutral-50 space-x-reverse items-center -translate-y-4 -mb-2 z-50 drop-shadow-xl">
+            <div className="pr-2 z-50">
               <HelpTooltip content="Here's where you can create a new Stitch, or a journal entry! Quickly post to multiple journals at once, or save a draft to keep working on a Stitch later." />
             </div>
             <div className="grow">
               Hey, it doesn't look like you have any journals yet. Why not{" "}
-              <Link to="/journals">create one?</Link>
+              <Link to="/myjournals" className="underline text-primary active:text-primary-dim">
+                create one?
+              </Link>
             </div>
           </div>
         )}

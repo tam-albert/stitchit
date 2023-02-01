@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   bio: String,
   pfp: {
     type: String,
-    default: "https://i.imgur.com/U3MN5eW.png",
+    default: "https://i.imgur.com/XUgdKnB.jpg",
   },
 });
 
