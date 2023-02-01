@@ -58,7 +58,7 @@ const NewComment = (props) => {
         placeholder="New Comment"
         value={value}
         onChange={handleChange}
-        className="border border-darkgrey p-1 rounded-sm resize-none"
+        className="border border-darkgrey p-1 rounded-sm h-24 resize-none"
       />
       <button
         type="submit"
