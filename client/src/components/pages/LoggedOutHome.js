@@ -31,7 +31,7 @@ const LoggedOutHome = (props) => {
               Logout
             </button>
           ) : (
-            <GoogleLogin onSuccess={props.handleLogin} onError={(err) => console.log(err)} />
+            <GoogleLogin onSuccess={props.handleLogin} />
           )}
         </GoogleOAuthProvider>
       </div>
