@@ -3,7 +3,7 @@ import { get } from "../../utilities.js";
 
 import SinglePrompt from "../modules/SinglePrompt.js";
 
-const Prompts = (props) => {
+const Prompts = () => {
   const [prompts, setPrompts] = useState([]);
 
   useEffect(() => {
@@ -26,6 +26,9 @@ const Prompts = (props) => {
         ) : (
           <span className="italic text-lg text-center">No prompts yet!</span>
         )}
+        <div className="w-full text-center text-2xl">
+          Prompts to help bring out those feelings bubbling in your mind.
+        </div>
       </div>
     </div>
   );

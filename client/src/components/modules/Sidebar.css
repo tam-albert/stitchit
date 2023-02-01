@@ -2,7 +2,7 @@
 
 .Sidebar-container {
   font-family: "Mukta";
-  transition: 0.75s ease;
+  transition: 0.6s ease;
   font-weight: 500;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .Sidebar-container[minimized="1"] > div {
-  transition: 1s ease;
+  transition: 0.6s ease;
   padding-left: 0;
   padding-right: 0;
 }
