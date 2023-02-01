@@ -41,7 +41,7 @@ const Feed = (props) => {
             <>
               {singleActivities.slice(0, 8)}
               <button
-                className="w-full text-gray-700 italic"
+                className="w-full text-gray-700 italic underline"
                 onClick={() => setAllEntriesShown(true)}
               >{`+${singleActivities.length - 8} more...`}</button>
             </>

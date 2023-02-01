@@ -30,11 +30,11 @@ const ProfileNameCard = (props) => {
   };
 
   return (
-    <div className="top-0 left-0 -z-10 bg-gradient-to-l from-cyan-300 to-blue-700 w-full h-64 flex flex-col">
+    <div className="top-0 left-0 -z-10 bg-secondary w-full h-64 flex flex-col">
       <div className="grow"></div>
       <div className="flex">
         {props.profileId === props.userId ? (
-          <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16 group">
+          <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16 drop-shadow-md group">
             <img
               src={props.pfpUrl}
               className="object-cover w-full h-full group-hover:brightness-75"
@@ -52,7 +52,7 @@ const ProfileNameCard = (props) => {
             />
           </div>
         ) : (
-          <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16">
+          <div className="w-36 h-36 rounded-full overflow-hidden relative top-10 ml-16 drop-shadow-md">
             <img src={props.pfpUrl} className="w-full h-full object-cover" />
           </div>
         )}

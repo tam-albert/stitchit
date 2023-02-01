@@ -5,7 +5,7 @@ import { PencilIcon } from "@heroicons/react/20/solid";
 
 const SinglePrompt = (props) => {
   return (
-    <div className="p-4 border-2 border-neutral-500 rounded-md flex space-x-2 items-center">
+    <div className="p-4 bg-white rounded-md text-lg flex space-x-4 items-center">
       <span className="grow">
         <span>
           "{props.content.length > 75 ? `${props.content.slice(0, 75)}...` : props.content}"

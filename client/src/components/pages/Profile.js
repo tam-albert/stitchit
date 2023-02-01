@@ -51,7 +51,7 @@ const Profile = (props) => {
         profileId={props.profileId}
         userId={props.userId}
       />
-      <div className="flex flex-col space-y-4 p-12">
+      <div className="flex flex-col mt-4 space-y-4 p-12">
         {singleActivities.length ? (
           singleActivities.length > 9 ? (
             <>

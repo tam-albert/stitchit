@@ -103,13 +103,13 @@ const Home = (props) => {
           </div>
         ) : null}
         <textarea
-          className="w-full grow p-4 resize-none rounded-md text-lg placeholder:italic placeholder:text-2xl"
+          className="w-full grow p-4 resize-none rounded-md text-lg drop-shadow-lg placeholder:italic placeholder:text-2xl"
           placeholder="Speak your mind, or check out our Prompts tab for inspiration."
           maxLength="20000"
           onChange={handleChange}
           defaultValue={text}
         ></textarea>
-        <div className="bg-tertiary my-1 p-4 rounded-md flex flex-row-reverse items-center">
+        <div className="bg-tertiary my-2 p-4 rounded-md drop-shadow-lg flex flex-row-reverse items-center">
           <PostDialog publish={publish} disabled={!text} />
           <button
             className="border-2 border-slate-800 px-3 py-2 rounded-full mr-4 duration-100

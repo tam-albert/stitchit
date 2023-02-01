@@ -53,7 +53,7 @@ const InvitePrompt = (props) => {
             />
             <button
               onClick={invite}
-              className="ml-3 rounded-md bg-gray-800 text-white px-3 h-7 bg-opacity-80 hover:bg-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              className="inline-flex items-center border-solid border-2 border-gray-500 rounded-full px-3 py-1 ml-3 text-base hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
               Invite
             </button>
@@ -63,7 +63,7 @@ const InvitePrompt = (props) => {
       ) : (
         <button
           onClick={openPrompt}
-          className="flex items-center justify-center rounded-md bg-gray-500 bg-opacity-40 px-3 py-3 text-base font-bold text-white hover:bg-opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          className="inline-flex items-center border-solid border-2 border-gray-500 rounded-full px-3 py-2.5 text-base hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           <PlusIcon className="w-6 h-6" />
           <span className="ml-3 whitespace-nowrap">Invite Friends</span>

@@ -45,8 +45,9 @@ const NewEntry = (props) => {
       <div className="flex flex-row-reverse py-3 px-4 bg-tertiary rounded-md items-center">
         <button
           type="submit"
-          className="border-2 border-slate-800 py-1 px-2 rounded-lg duration-100
-          enabled:hover:bg-gray-50 disabled:text-neutral-500 disabled:border-2 disabled:border-neutral-500 disabled:opacity-75"
+          className="inline-flex items-center border-solid border-2 border-slate-800 rounded-full px-3 py-2 text-base duration-100
+          enabled:hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75
+          disabled:text-neutral-500 disabled:border-2 disabled:border-neutral-500 disabled:opacity-75"
           value="Submit"
           onClick={handleSubmit}
           disabled={!value}

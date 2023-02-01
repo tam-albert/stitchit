@@ -16,7 +16,7 @@ const Prompts = () => {
       <div className="flex flex-row-reverse px-8 mb-8">
         <HelpTooltip content="Choose one of these prompts to respond to! When you respond to a post in a journal and post that Stitch, others can see what prompt inspired you." />
       </div>
-      <div className="flex flex-col-reverse space-y-4 space-y-reverse">
+      <div className="flex flex-col-reverse space-y-6 space-y-reverse">
         {prompts.length ? (
           prompts.map((prompt) => (
             <SinglePrompt
