@@ -38,3 +38,30 @@ body {
   margin-top: 50px;
   margin-left: 43%;
 }
+
+.emptyText:placeholder-shown + label {
+  display: inline-block;
+  cursor: text;
+  transform: translate(0, 5.125rem);
+}
+
+.emptyText:not(:placeholder-shown) + label {
+  opacity: 0;
+}
+
+.blinking-cursor {
+  font-weight: 100;
+  font-size: 24px;
+  color: #7f8689;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    color: transparent;
+  }
+  50% {
+    color: black;
+  }
+}
