@@ -28,7 +28,6 @@ const PostDialog = (props) => {
   const handleSubmit = () => {
     props.publish(activeJournalIds).then(() => {
       if (activeJournalIds.size === 1) {
-        console.log("hi");
         navigate(`/journal/${[...activeJournalIds][0]}`);
       } else if (activeJournalIds.size > 1) {
         navigate("/myjournals");
