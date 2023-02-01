@@ -84,7 +84,7 @@ const Journal = (props) => {
   };
 
   const deleteJournal = () => {
-    fetch(`/api/journal/?journalId=${props.journalId}`, {
+    fetch(`/api/journal?journalId=${props.journalId}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json" },
     });
