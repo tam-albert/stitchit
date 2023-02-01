@@ -25,16 +25,6 @@ const LoggedOutHome = (props) => {
         onMouseOut={(e) => (e.currentTarget.src = title)}
       />
       <h1 className="tag">a collaborative journal.</h1>
-      <div className="flex flex-col-reverse items-center">
-        <textarea
-          id="text"
-          placeholder="Speak your mind..."
-          className="emptyText rounded-lg p-2 mt-12 placeholder:italic placeholder:text-center placeholder:opacity-0 placeholder-shown:bg-[#faebd7] ease-out text-lg min-w-[33%] focus:outline-none resize-none placeholder-shown:caret-[#faebd7]"
-        />
-        <label for="text" className="italic text-gray-500 text-lg relative">
-          Just start typing (no strings attached!)<span class="blinking-cursor">|</span>
-        </label>
-      </div>
       <div className="join">
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           {props.userId ? (
@@ -50,6 +40,16 @@ const LoggedOutHome = (props) => {
             <GoogleLogin onSuccess={props.handleLogin} />
           )}
         </GoogleOAuthProvider>
+      </div>
+      <div className="flex flex-col-reverse items-center">
+        <textarea
+          id="text"
+          placeholder="Speak your mind..."
+          className="emptyText rounded-lg p-2 mt-12 placeholder:italic placeholder:text-center placeholder:opacity-0 placeholder-shown:bg-[#faebd7] ease-out text-lg min-w-[33%] focus:outline-none resize-none placeholder-shown:caret-[#faebd7]"
+        />
+        <label for="text" className="italic text-gray-500 text-lg relative">
+          Just start typing (no strings attached!)<span class="blinking-cursor">|</span>
+        </label>
       </div>
     </>
   );
