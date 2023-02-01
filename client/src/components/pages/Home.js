@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PostDialog from "../modules/PostDialog";
-import { post } from "../../utilities";
+import { get, post } from "../../utilities";
 import { useNavigate } from "@reach/router";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import HelpTooltip from "../modules/HelpTooltip.js";
+import { Link } from "@reach/router";
 
 import "../../utilities.css";
 import "./Home.css";
@@ -12,7 +14,16 @@ const Home = (props) => {
     props.location?.state?.content ? props.location?.state?.content : ""
   );
 
+  // default true so that dialog doesn't pop up lol
+  const [hasJournals, setHasJournals] = useState(true);
+
   const [prompt, setPrompt] = useState(props.location?.state?.prompt);
+
+  useEffect(() => {
+    get("/api/journals", (journals) => {
+      setHasJournals(!!journals);
+    });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -69,7 +80,18 @@ const Home = (props) => {
 
   return (
     <>
-      <div className="px-16 py-12 h-full flex flex-col">
+      <div className="px-16 p-12 h-full flex flex-col">
+        {hasJournals ? null : (
+          <div className="flex flex-row-reverse p-3 rounded-md space-x-4 bg-neutral-50 space-x-reverse items-center -translate-y-4 -mb-3">
+            <div className="pr-2">
+              <HelpTooltip content="Here's where you can create a new Stitch, or a journal entry! Quickly post to multiple journals at once, or save a draft to keep working on a Stitch later." />
+            </div>
+            <div className="grow">
+              Hey, it doesn't look like you have any journals yet. Why not{" "}
+              <Link to="/journals">create one?</Link>
+            </div>
+          </div>
+        )}
         {prompt ? (
           <div className="bg-gray-100 my-1 p-4 rounded-md flex items-center">
             <div className="grow text-lg">

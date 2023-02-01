@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import HelpTooltip from "../modules/HelpTooltip.js";
 import { get } from "../../utilities.js";
 
 import SingleDraft from "../modules/SingleDraft.js";
@@ -16,6 +17,9 @@ const Drafts = (props) => {
 
   return (
     <div className="p-12">
+      <div className="flex flex-row-reverse px-8 mb-8">
+        <HelpTooltip content="Drafts that you create on the New Stitch page end up here, so you can pick up right where you left off." />
+      </div>
       <div className="flex flex-col-reverse space-y-4 space-y-reverse">
         {drafts.length ? (
           drafts.map((draft) => (

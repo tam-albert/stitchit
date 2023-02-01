@@ -5,6 +5,7 @@ import InvitePrompt from "../modules/InvitePrompt.js";
 import PeopleList from "../modules/PeopleList.js";
 import NotFound from "./NotFound";
 import ImageUpload from "../modules/ImageUpload.js";
+import HelpTooltip from "../modules/HelpTooltip.js";
 
 import { PhotoIcon } from "@heroicons/react/24/outline";
 

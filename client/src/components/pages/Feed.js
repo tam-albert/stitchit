@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../../utilities";
 import SingleActivity from "../modules/SingleActivity";
+import HelpTooltip from "../modules/HelpTooltip";
 
 const Feed = (props) => {
   const [activities, setActivities] = useState([]);
   const [singleActivities, setSingleActivities] = useState([]);
+  const [allEntriesShown, setAllEntriesShown] = useState(false);
 
   useEffect(() => {
     get("/api/feed").then((activityObjs) => {
@@ -30,14 +32,18 @@ const Feed = (props) => {
 
   return (
     <div className="p-12">
+      <div className="flex flex-row-reverse px-8 mb-8">
+        <HelpTooltip content="Here's your feed, so you can see what your friends are up to at a glance and jump to journals quickly!" />
+      </div>
       <div className="flex flex-col space-y-4">
         {singleActivities.length ? (
-          singleActivities.length > 9 ? (
+          (singleActivities.length > 8) & !allEntriesShown ? (
             <>
-              {singleActivities.slice(0, 9)}
-              <div className="w-full text-center text-gray-700 italic">{`+${
-                singleActivities.length - 9
-              } more...`}</div>
+              {singleActivities.slice(0, 8)}
+              <button
+                className="w-full text-gray-700 italic"
+                onClick={() => setAllEntriesShown(true)}
+              >{`+${singleActivities.length - 8} more...`}</button>
             </>
           ) : (
             singleActivities
