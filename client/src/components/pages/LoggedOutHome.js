@@ -4,6 +4,7 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 import "../../utilities.css";
 import "./LoggedOutHome.css";
 import title from "./stitchit_title.png";
+import hover_title from "./stitchit_title_hover.png";
 
 // This identifies your web application to Google's authentication service
 const GOOGLE_CLIENT_ID = "985251671309-tjcerql1bd9pdco3398e8srppbcvat4t.apps.googleusercontent.com";
@@ -16,7 +17,7 @@ const LoggedOutHome = (props) => {
 
   return (
     <>
-      <img src={title} alt="Title" className="title" />
+      <img src={title} alt="Title" className="title" onMouseOver={e => (e.currentTarget.src=hover_title)} onMouseOut={e => (e.currentTarget.src=title)}/>
       <h1 className="tag">a collaborative journal.</h1>
       <div className="join">
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
