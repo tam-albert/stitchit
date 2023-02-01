@@ -20,8 +20,8 @@ const Home = (props) => {
   const [prompt, setPrompt] = useState(props.location?.state?.prompt);
 
   useEffect(() => {
-    get("/api/journals", (journals) => {
-      setHasJournals(!!journals);
+    get("/api/journals").then((journals) => {
+      setHasJournals(!!journals.length);
     });
   }, []);
 
@@ -34,7 +34,7 @@ const Home = (props) => {
 
   const publish = async (journalIds) => {
     await Promise.all(
-      journalIds.map(async (id) => {
+      Array.from(journalIds).map(async (id) => {
         const body = {
           content: text,
           journal_id: id,
@@ -103,7 +103,7 @@ const Home = (props) => {
           </div>
         ) : null}
         <textarea
-          className="w-full grow p-4 resize-none rounded-md text-lg drop-shadow-lg placeholder:italic placeholder:text-2xl"
+          className="w-full grow p-4 z-0 resize-none rounded-md text-lg drop-shadow-lg placeholder:italic placeholder:text-2xl"
           placeholder="Speak your mind, or check out our Prompts tab for inspiration."
           maxLength="20000"
           onChange={handleChange}

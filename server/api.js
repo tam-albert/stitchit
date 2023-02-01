@@ -86,7 +86,7 @@ router.get("/journalEntries", (req, res) => {
     const objectId = new mongoose.mongo.ObjectID(req.query.journalId);
     Journal.findById(objectId).then((journal) => {
       Entry.find({
-        _id: { $in: journal.entries_list },
+        _id: { $in: journal?.entries_list },
       }).then((entries) => res.send(entries));
     });
   } catch (e) {
@@ -222,6 +222,23 @@ router.delete("/draft", auth.ensureLoggedIn, (req, res) => {
     Draft.findOneAndDelete({ _id: draftObjectId, creator_id: req.user._id })
       .then((draft) => {
         res.send(draft);
+      })
+      .catch((err) => res.send({ msg: err }));
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
+router.delete("/journal", auth.ensureLoggedIn, (req, res) => {
+  try {
+    const journalObjectId = new mongoose.mongo.ObjectID(req.query.journalId);
+    Journal.findOneAndDelete({ _id: journalObjectId, collaborator_ids: req.user._id })
+      .then((journal) => {
+        Activity.deleteMany({
+          link: `/journal/${req.query.journalId}`,
+        })
+          .then(() => res.send(journal))
+          .catch((err) => res.send({ msg: err }));
       })
       .catch((err) => res.send({ msg: err }));
   } catch (e) {

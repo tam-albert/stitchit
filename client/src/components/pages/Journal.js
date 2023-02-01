@@ -5,9 +5,10 @@ import InvitePrompt from "../modules/InvitePrompt.js";
 import PeopleList from "../modules/PeopleList.js";
 import NotFound from "./NotFound";
 import ImageUpload from "../modules/ImageUpload.js";
-import HelpTooltip from "../modules/HelpTooltip.js";
+import DeleteJournal from "../modules/DeleteJournal.js";
+import { useNavigate } from "@reach/router";
 
-import { PhotoIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 import { get, post } from "../../utilities";
 import "./Journal.css";
@@ -18,6 +19,11 @@ const Journal = (props) => {
   const [names, setNames] = useState([]);
   const [ids, setIds] = useState([]);
   const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [journalName, setJournalName] = useState("");
+  const [journalId, setJournalId] = useState(null);
+
+  const navigator = useNavigate();
 
   // Check if the journal actually exists
   useEffect(() => {
@@ -25,6 +31,8 @@ const Journal = (props) => {
       .then((journal) => {
         setIds(journal.collaborator_ids);
         setNames(journal.collaborator_names);
+        setJournalName(journal.name);
+        setJournalId(journal._id);
       })
       .catch(() => {
         setJournalExists(false);
@@ -63,8 +71,24 @@ const Journal = (props) => {
     setImageModalOpen(false);
   };
 
+  const openDeleteModal = () => {
+    setDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+  };
+
   const updateCoverPhoto = (newUrl) => {
     post("/api/images/updatecoverphoto", { journalId: props.journalId, photoUrl: newUrl });
+  };
+
+  const deleteJournal = () => {
+    fetch(`/api/journal?journalId=${props.journalId}`, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    });
+    navigator("/myjournals");
   };
 
   let entriesList = null;
@@ -102,6 +126,19 @@ const Journal = (props) => {
               isOpen={imageModalOpen}
               closeModal={closeImageModal}
               handleImageUrl={updateCoverPhoto}
+            />
+            <button
+              className="inline-flex items-center border-solid border-2 border-red-500 rounded-full px-3 py-2 text-base duration-100 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              onClick={openDeleteModal}
+            >
+              <TrashIcon className="w-5 h-5 text-red-500" />
+              <span className="text-lg text-red-500 ml-2">Delete Journal</span>
+            </button>
+            <DeleteJournal
+              isOpen={deleteModalOpen}
+              closeModal={closeDeleteModal}
+              journalName={journalName}
+              deleteJournal={deleteJournal}
             />
           </div>
 
