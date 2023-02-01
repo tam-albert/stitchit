@@ -716,6 +716,14 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.-mb-4{
+  margin-bottom: -1rem;
+}
+
+.-mb-2{
+  margin-bottom: -0.5rem;
+}
+
 .block{
   display: block;
 }
@@ -1775,6 +1783,11 @@ form {
 
 .active\:stroke-darker-pink:active{
   stroke: #f79e8c;
+}
+
+.active\:text-primary-dim:active{
+  --tw-text-opacity: 1;
+  color: rgb(105 135 219 / var(--tw-text-opacity));
 }
 
 .active\:duration-100:active{
