@@ -51,11 +51,9 @@ const createNewActivity = (creatorId, creatorName, content, link, visibleTo) => 
 };
 
 const makeActivitiesVisibleTo = async (query, newUser) => {
-  console.log(query, newUser);
   const result = await Activity.updateMany(query, {
     $addToSet: { visible_to: newUser },
   });
-  console.log(result);
 };
 
 const makeActivitiesInvisibleTo = (query, hideFromUser) => {
@@ -372,7 +370,6 @@ router.post("/images/updatecoverphoto", auth.ensureLoggedIn, (req, res) => {
   // need to add handling to make sure you're not updating a random journal's cover photo
   try {
     const journalObjectId = new mongoose.mongo.ObjectID(req.body.journalId);
-    console.log(journalObjectId);
     Journal.findById(journalObjectId).then((journal) => {
       if (!journal) {
         res.status(400).send({ msg: "wtf are you doing??" });

@@ -46,7 +46,6 @@ const App = () => {
   const handleLogin = (credentialResponse) => {
     const userToken = credentialResponse.credential;
     const decodedCredential = jwt_decode(userToken);
-    console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       // the server knows we're logged in now
       setUserId(user._id);
@@ -55,7 +54,6 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    console.log("Logged out successfully!");
     setUserId(null);
     setUserName(null);
     post("/api/logout");

@@ -29,7 +29,6 @@ const Home = (props) => {
 
   const handleChange = (event) => {
     setText(event.target.value);
-    console.log(text);
   };
 
   const publish = async (journalIds) => {
@@ -42,7 +41,6 @@ const Home = (props) => {
           prompt_content: prompt?.content,
         };
         await post("/api/entry", body);
-        console.log(`Published entry to journal with ID ${id}`);
         if (props.location?.state?.draftId) {
           // Remove draft from existence once it's published
           await fetch(`/api/draft/?draftId=${props.location?.state?.draftId}`, {
@@ -71,7 +69,7 @@ const Home = (props) => {
       .then(() => {
         navigate("/drafts");
       })
-      .catch((err) => console.log(err));
+      .catch();
   };
 
   const removePrompt = () => {
